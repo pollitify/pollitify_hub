@@ -1,2 +1,133 @@
-<h1>Users::Settings#index</h1>
-<p>Find me in app/views/devuse/settings/index.html.erb</p>
+<h1>Your Settings</h1>
+
+<style>
+.nav-pills .nav-link#v-pills-privacy-tab.active {
+  --bs-nav-pills-link-active-bg: var( --bs-warning);
+  --bs-border-color: var(--bs-warning);
+  --bs-nav-pills-link-active-color: var(--bs-black);
+}
+.nav-pills .nav-link#v-pills-preferences-tab.active {
+  --bs-nav-pills-link-active-bg: var(--bs-success);
+  --bs-border-color: var(--bs-success);
+}
+@media (max-width: 480px) {
+  #v-pills-tab {
+    flex-direction: column !important;
+  }
+
+  #v-pills-privacy-tab {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+</style>
+
+<div class="row my-5">
+  <div class="col-md-3">
+    <div class="nav flex-md-column flex-row nav-pills justify-content-between justify-content-md-start" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link border active" id="v-pills-notifications-tab" data-bs-toggle="pill" href="#v-pills-notifications" role="tab" aria-controls="v-pills-notifications" aria-selected="true">Notifications</a>
+      <a class="nav-link border my-0 my-md-2 mx-2 mx-md-0" id="v-pills-privacy-tab" data-bs-toggle="pill" href="#v-pills-privacy" role="tab" aria-controls="v-pills-privacy" aria-selected="false">Privacy Settings</a>
+      <a class="nav-link border" id="v-pills-preferences-tab" data-bs-toggle="pill" href="#v-pills-preferences" role="tab" aria-controls="v-pills-preferences" aria-selected="false">Preferences</a>
+    </div>
+  </div>
+
+  <div class="col-md-9 mt-4 mt-md-0">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
+        <div class="card border-primary">
+          <div class="card-header">
+            <h5>Notification Settings</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="email-notifications" checked="" />
+                <label class="form-check-label" for="email-notifications">
+                  Receive email notifications
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="sms-notifications" />
+                <label class="form-check-label" for="sms-notifications">
+                  Receive SMS notifications
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="push-notifications" checked="" />
+                <label class="form-check-label" for="push-notifications">
+                  Receive push notifications
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Save Notification Settings</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
+        <div class="card border-warning">
+          <div class="card-header">
+            <h5>Privacy Settings</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="profile-visible" checked="" />
+                <label class="form-check-label" for="profile-visible">
+                  Make profile visible to others
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="show-activity" checked="" />
+                <label class="form-check-label" for="show-activity">
+                  Show activity status
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="data-sharing" />
+                <label class="form-check-label" for="data-sharing">
+                  Share data with third parties
+                </label>
+              </div>
+              <button type="submit" class="btn btn-warning mt-3">Save Privacy Settings</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="v-pills-preferences" role="tabpanel" aria-labelledby="v-pills-preferences-tab">
+        <div class="card border-success">
+          <div class="card-header">
+            <h5>User Preferences</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="mb-3">
+                <label for="language" class="form-label">Language</label>
+                <select class="form-select" id="language">
+                  <option selected="">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="de">German</option>
+                  <option value="zh">Chinese</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="timezone" class="form-label">Timezone</label>
+                <select class="form-select" id="timezone">
+                  <option selected="">UTC - New York</option>
+                  <option value="london">UTC - London</option>
+                  <option value="paris">UTC - Paris</option>
+                  <option value="tokyo">UTC - Tokyo</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-success mt-3">Save Preferences</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
