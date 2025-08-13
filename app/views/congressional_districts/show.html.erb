@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @congressional_district %>
+
+<div>
+  <%= link_to "Edit this congressional district", edit_congressional_district_path(@congressional_district) %> |
+  <%= link_to "Back to congressional districts", congressional_districts_path %>
+
+  <%= button_to "Destroy this congressional district", @congressional_district, method: :delete %>
+</div>

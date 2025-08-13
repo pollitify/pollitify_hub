@@ -5,7 +5,8 @@ gem "rails", "~> 8.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
+#gem "sqlite3", ">= 2.1"
+gem 'pg'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -40,7 +41,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+##gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -51,6 +52,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -62,8 +66,49 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'database_cleaner-active_record'
 end
 
 gem "dotenv-rails", "~> 3.1", groups: [ :development, :test ]
 
 gem "devise", "~> 4.9"
+
+gem "wicked"
+gem "date_common"
+gem "text_common"
+gem "time_common"
+gem "url_common"
+gem 'ostruct'
+gem 'awesome_print'
+
+gem 'acts_as_votable'
+gem 'image_processing', '~> 1.12'
+gem 'vobject'
+
+gem 'mailgun-ruby'
+
+# group :production do
+#   gem 'rmagick'
+#   gem 'rqrcode'
+# end
+gem "honeybadger", "~> 5.28"
+
+#gem 'ruby-vips'
+#gem 'pagy', require: ['pagy/extras/bootstrap']
+gem 'kaminari'
+gem 'whenever', require: false
+gem 'ice_cube'
+
+# gem 'rails-observers'
+# gem 'merit'
+
+gem 'activerecord-postgis-adapter'
+gem 'rgeo' # handles geometry objects
+gem 'rgeo-activerecord'
+gem 'rgeo-geojson' 
+
+gem "meilisearch-rails"
+
+gem 'chronic'
+
+gem 'geocoder'

@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if current_user && current_user.is_super_user? %>
+      <th scope="col" class="text-center">#</th>
+      <% end %>
+      <% if current_user && current_user.has_editing_privileges? %>   
+        <th scope="col" class="text-center"></th>        
+      <% end %>
+      <th scope="col" class="text-center">Date</th>
+      <th scope="col" class="text-center">Time Start</th>
+      <th scope="col" class="text-center">Name</th>
+      <th scope="col" class="text-center">City</th>
+    </tr>
+  </thead>
+  <tbody>

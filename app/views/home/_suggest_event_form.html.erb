@@ -1,0 +1,47 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <%= form.hidden_field :suggested_event, value: true %>
+  <%= form.hidden_field :event_type, value: 'suggested' %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <fieldset>
+    <legend>
+      Event Basics: Mobilize Url?
+    </legend>
+    <div class="mb-3">
+      <%= form.label :mobilize_url, "If this event is already on Mobilize, just paste that in below", style: "display: block" %>
+      <%= form.text_field :mobilize_url, style: "width: 100%;"  %>
+    </div>
+  </fieldset>
+  
+  <h2 class="text-center">-OR- Fill Out This Form</h2>
+  
+  <%= render 'events/form_name_and_description', { event: event, form: form, :suggest_event => true}%>
+  <%= render 'events/form_when', { event: event, form: form, :suggest_event => true, }%>
+  <%#= render 'form_privacy', { event: event, form: form, visibilities: visibilities}%>
+  <%= render 'events/form_where', { event: event, form: form, :states => @states, :suggest_event => true, }%>
+  <%#= render 'form_recurrence', { event: event, form: form}%>
+  <%#= render 'form_online', { event: event, form: form}%>
+  <%#= render 'form_attachments', { event: event, form: form}%>
+  <%#= render 'form_features', { event: event, form: form}%>
+  <%#= render 'form_on_off', { event: event, form: form}%>
+  <%#= render 'form_admin', { event: event, form: form}%>
+  <%#= render 'form_flier_generator', { event: event, form: form}%>
+  
+  
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+
+  <div class="text-center">
+    <%= form.submit "Save suggested Event and Submit for Review!", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,8 +1,8 @@
 # Name of your application. Used to uniquely configure containers.
-service: rails_8_authentication
+service: pollitifyhub
 
 # Name of the container image.
-image: your-user/rails_8_authentication
+image: fuzzygroup/pollitifyhub
 
 # Deploy to these servers.
 servers:

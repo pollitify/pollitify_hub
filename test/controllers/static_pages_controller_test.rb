@@ -16,8 +16,8 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get features" do
-    get features_path
+  test "should get product_features" do
+    get product_features_path
     assert_response :success
   end
 end

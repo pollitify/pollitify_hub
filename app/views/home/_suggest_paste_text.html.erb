@@ -1,0 +1,28 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <%= form.hidden_field :suggested_event, value: true %>
+  <%= form.hidden_field :event_type, value: 'suggested' %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <fieldset>
+    <legend>
+      Paste In Your Event Description
+    </legend>
+    <div class="mb-3">
+      <%= form.label :pasted_description, "Event description:", style: "display: block" %>
+      <%= form.text_area :pasted_description, style: "width: 100%;"  %>
+    </div>
+  </fieldset>
+  <div class="text-center">
+    <%= form.submit "Save suggested Event and Submit for Review!", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,28 @@
+  <fieldset>
+    <legend>
+      Event Basics: Name and Description
+    </legend>
+    <div class="mb-3">
+      <%= form.label :name, "What is the name of the event?", style: "display: block" %>
+      <%= form.text_field :name, style: "width: 100%;"  %>
+    </div>
+  
+    <div class="mb-3">
+      <strong><%= form.label :body, "Please describe the event -- the theme, what is going to happen and so on.", style: "display: block" %></strong>
+      <%= form.textarea :body  %>
+    
+    </div>
+    <% if params[:suggest_event] == "1" || suggest_event == true %>
+      <!-- 
+        The event type dialog is hidden for end users suggested events; too complex
+        -->
+    <% else %>
+      <div class="mb-3">
+        <%= form.label :event_type_id, "What type of event is this?", class: 'form-label' %>
+        <%= form.select :event_type_id,
+          options_from_collection_for_select(@event_types, :id, :name, event.try(:event_type_id)),
+          { prompt: '' },
+          { class: 'form-select', style: 'width: 100%;' } %>
+      </div>
+    <% end %>
+  </fieldset>

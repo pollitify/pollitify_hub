@@ -1,0 +1,11 @@
+<% content_for :title, "New congressional district" %>
+
+<h1>New congressional district</h1>
+
+<%= render "form", congressional_district: @congressional_district %>
+
+<br>
+
+<div>
+  <%= link_to "Back to congressional districts", congressional_districts_path %>
+</div>

@@ -1,0 +1,167 @@
+<h1 class="text-center">Welcome to setting up your <%=BASE_PRODUCT_NAME%> tools - 2</h1>
+<h2 class="text-center">Your Organization</h1>
+<%=add_spacer%>
+<p><%=BASE_PRODUCT_NAME%> is software that works through a web browser or (coming soon) an app.  Your <%=BASE_PRODUCT_NAME%> software is hosted on an Internet domain that you get to choose.  This can be a domain that that is owned by The <%=BASE_PRODUCT_NAME%> organization -or- as a subdomain off a domain that you own.
+  
+Here are two examples:
+
+<ol>
+  <li>your-organization-name.pollitify.com</li>
+  <li>pollitify.your-existing-internet-domain.com -or- whatever-you-want.your-existing-internet-domain.com</li>
+</ol>
+  
+<p>In order to give you choices, we own a number of different politically oriented domain names like pollitify, democrify, pollytics, etc.  You don't have to use the name "pollitify" if you don't want to.  Sure -- we'd appreciate it -- but ultimately the goal here is democracy not promoting our brand.  We get that.</p>
+<p>
+
+<%= form_with model: @organization, url: wizard_path, method: :put do |f| %>
+<%= render 'progress' %>
+
+<!--
+  <fieldset>
+    <legend>
+    </legend>
+  </fieldset>
+-->
+
+<fieldset>
+  <legend>
+    Do you want your <%=BASE_PRODUCT_NAME%> software on our domain or your domain?    
+  </legend>
+    
+  <p><%= f.radio_button :use_pollitify_base_domain, value: true%>&nbsp;
+    <%= f.label :use_pollitify_base_domain, 'I want to use a Pollitify base domain', for: 'organization_use_pollitify_base_domain_true' %></p>
+    
+  <p><%= f.radio_button :use_pollitify_base_domain, value: false%>&nbsp;<%= f.label :use_pollitify_base_domain, 'I want to use my own domain', for: 'organization_use_pollitify_base_domain_false' %></p>
+    
+  <p><strong>IMPORTANT</strong>: Please note that there is a $100 one time charge for hosting it on your domain.  This is a technical support fee for assisting you with your DNS entry and it covers the costs of our time</p>
+</fieldset>
+
+<%#=add_spacer%>
+
+  <fieldset style="display: none" id="ownDomainFieldset">
+    <legend>
+      I want to use my own domain
+    </legend>
+    
+    <div class="mb-3">
+      <%= f.label :my_domain, "This is the domain I own and control:" %>
+      <%= f.text_field :my_domain, class: "form-control" %>
+    </div>
+  </fieldset>
+
+<%#=add_spacer%>
+
+<fieldset id="pollitifyDomainsFieldset" style="display: none">
+  <legend>
+    I want to use a <%=BASE_PRODUCT_NAME%> domain:
+  </legend>
+  <p>Here are the available domains:</p>
+  <ul  class="list-unstyled">
+  <% @domains.each do |domain| %>
+  <!--
+    <li><%#= f.radio_button :domain_id, value: domain.id, data: { domain_name: domain.name } %>&nbsp;<%#=domain.name%>
+    -->
+    <li><%= radio_button_tag :domain_id, domain.id, false, data: { domain_name: domain.name } %>
+        <%= domain.name %>
+      
+  <% end %>
+  </ul>
+</fieldset>
+<%#=add_spacer%>
+  <fieldset id="mySubdomain" style="display:none">
+    <legend>
+      My Subdomain
+    </legend>
+    <p>In Internet parlance, a subdomain is the name <em>before</em> the .pollytics.org (or whatever you selected above).  Let's say your organization name is Ohio Resistance.  This might make your subdomain be "ohioresistance" or a total url of "ohioresistance.pollytics.org".</p>
+    <p><strong>NOTE</strong>: Subdomains can use any a-z characters, 0-9 and a dash character; that's it!</p>
+    <p>What do you want your subdomain to be?</p>
+    <div class="mb-3">
+      <%= f.label :sub_domain, 'Subdomain:' %>
+      <%= f.text_field :sub_domain, class: "form-control" %>
+    </div>
+  </fieldset>
+  <%#=add_spacer%>
+  
+  <fieldset id="previewDomain" style="display:none">
+    <legend>
+      Preview Your Url
+    </legend>
+    <p>This makes your final url:
+      
+      <div id="full_url_preview" style="margin-top: 1em; font-weight: bold; text-color: yellow;">
+      
+    <div id="final_url" class="text-center">
+      <h2><strong>https://</strong></h2>
+    </div>
+    </div>
+    <br/>
+    <!--
+      BCG TODO validate the domain 
+      -->
+    <p>If you like that then please click next to validate your domain and continue.  Alternatively you can pick a different base domain and subdomain.</p>
+  </fieldset>
+
+<%#=primary_action_button("Next", "/setup/your_features")%>
+  <%= render 'nav_buttons', f: f, previous_step: @organization.previous_step, next_step: @organization.next_step %>
+  
+
+<% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const showPollitifyDomains = document.getElementById("organization_use_pollitify_base_domain_value_true");
+    const showOwnDomain = document.getElementById("organization_use_pollitify_base_domain_value_false");
+
+    const pollitifyDomainsFieldset = document.getElementById("pollitifyDomainsFieldset");
+    const ownDomainFieldset = document.getElementById("ownDomainFieldset");
+    const mySubdomain = document.getElementById("mySubdomain");
+    const previewDomain = document.getElementById("previewDomain");
+
+    function toggleFieldsets() {
+      if (showPollitifyDomains.checked) {
+        pollitifyDomainsFieldset.style.display = "block";
+        ownDomainFieldset.style.display = "none";
+      } else if (showOwnDomain.checked) {
+        pollitifyDomainsFieldset.style.display = "none";
+        ownDomainFieldset.style.display = "block";
+      }
+      mySubdomain.style.display = "block";
+      previewDomain.style.display = "block";
+
+    }
+
+    // Add change listeners
+    showPollitifyDomains.addEventListener("change", toggleFieldsets);
+    showOwnDomain.addEventListener("change", toggleFieldsets);
+  });
+</script>
+
+<script>
+  //
+  // BCG TODO fix preview for own domain
+  //
+  console.log("Foo");
+  document.addEventListener('DOMContentLoaded', function () {
+    //const domainRadios = document.querySelectorAll('input[name="domain_id"]');
+    const domainRadios = document.querySelectorAll('input[name="domain_id"]');
+    const subDomainInput = document.getElementById('organization_sub_domain');
+    const preview = document.getElementById('final_url');
+    console.log(subDomainInput);
+    function updateURLPreview() {
+      const selectedRadio = document.querySelector('input[name="domain_id"]:checked');
+      const subdomain = subDomainInput.value.trim();
+      if (selectedRadio && subdomain) {
+        const domainName = selectedRadio.dataset.domainName;
+        preview.textContent = `https://${subdomain}.${domainName}`;
+      } else {
+        preview.textContent = '';
+      }
+    }
+
+    domainRadios.forEach(radio => {
+      radio.addEventListener('change', updateURLPreview);
+    });
+
+    subDomainInput.addEventListener('input', updateURLPreview);
+  });
+</script>

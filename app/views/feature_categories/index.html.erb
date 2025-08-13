@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Feature categories" %>
+
+<h1>Feature categories</h1>
+
+<div id="feature_categories">
+  <% @feature_categories.each do |feature_category| %>
+    <%= render feature_category %>
+    <p>
+      <%= link_to "Show this feature category", feature_category %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New feature category", new_feature_category_path %>

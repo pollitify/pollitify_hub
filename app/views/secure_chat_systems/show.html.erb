@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @secure_chat_system %>
+
+<div>
+  <%= link_to "Edit this secure chat system", edit_secure_chat_system_path(@secure_chat_system) %> |
+  <%= link_to "Back to secure chat systems", secure_chat_systems_path %>
+
+  <%= button_to "Destroy this secure chat system", @secure_chat_system, method: :delete %>
+</div>

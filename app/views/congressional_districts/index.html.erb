@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Congressional districts" %>
+
+<h1>Congressional districts</h1>
+
+<div id="congressional_districts">
+  <% @congressional_districts.each do |congressional_district| %>
+    <%= render congressional_district %>
+    <p>
+      <%= link_to "Show this congressional district", congressional_district %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New congressional district", new_congressional_district_path %>

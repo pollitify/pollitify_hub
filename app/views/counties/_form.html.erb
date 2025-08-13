@@ -1,0 +1,72 @@
+<%= form_with(model: county) do |form| %>
+  <% if county.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(county.errors.count, "error") %> prohibited this county from being saved:</h2>
+
+      <ul>
+        <% county.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :name_ascii, style: "display: block" %>
+    <%= form.text_field :name_ascii %>
+  </div>
+
+  <div>
+    <%= form.label :name_full, style: "display: block" %>
+    <%= form.text_field :name_full %>
+  </div>
+
+  <div>
+    <%= form.label :county_fips, style: "display: block" %>
+    <%= form.text_field :county_fips %>
+  </div>
+
+  <div>
+    <%= form.label :state_id, style: "display: block" %>
+    <%= form.text_field :state_id %>
+  </div>
+
+  <div>
+    <%= form.label :state_abbreviation, style: "display: block" %>
+    <%= form.text_field :state_abbreviation %>
+  </div>
+
+  <div>
+    <%= form.label :state_name, style: "display: block" %>
+    <%= form.text_field :state_name %>
+  </div>
+
+  <div>
+    <%= form.label :lat, style: "display: block" %>
+    <%= form.text_field :lat %>
+  </div>
+
+  <div>
+    <%= form.label :lng, style: "display: block" %>
+    <%= form.text_field :lng %>
+  </div>
+
+  <div>
+    <%= form.label :coordinates, style: "display: block" %>
+    <%= form.text_field :coordinates %>
+  </div>
+
+  <div>
+    <%= form.label :population, style: "display: block" %>
+    <%= form.number_field :population %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

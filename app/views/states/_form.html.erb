@@ -1,0 +1,62 @@
+<%= form_with(model: state) do |form| %>
+  <% if state.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(state.errors.count, "error") %> prohibited this state from being saved:</h2>
+
+      <ul>
+        <% state.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :abbreviation, style: "display: block" %>
+    <%= form.text_field :abbreviation %>
+  </div>
+
+  <div>
+    <%= form.label :fid, style: "display: block" %>
+    <%= form.text_field :fid %>
+  </div>
+
+  <div>
+    <%= form.label :population, style: "display: block" %>
+    <%= form.number_field :population %>
+  </div>
+
+  <div>
+    <%= form.label :congressional_district_count, style: "display: block" %>
+    <%= form.number_field :congressional_district_count %>
+  </div>
+
+  <div>
+    <%= form.label :wikipedia_congressional_district_url, style: "display: block" %>
+    <%= form.text_field :wikipedia_congressional_district_url %>
+  </div>
+
+  <div>
+    <%= form.label :wikipedia_congressional_district_map_url, style: "display: block" %>
+    <%= form.text_field :wikipedia_congressional_district_map_url %>
+  </div>
+
+  <div>
+    <%= form.label :counties_count, style: "display: block" %>
+    <%= form.number_field :counties_count %>
+  </div>
+
+  <div>
+    <%= form.label :townships_count, style: "display: block" %>
+    <%= form.text_field :townships_count %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

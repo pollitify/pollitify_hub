@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Secure chat systems" %>
+
+<h1>Secure chat systems</h1>
+
+<div id="secure_chat_systems">
+  <% @secure_chat_systems.each do |secure_chat_system| %>
+    <%= render secure_chat_system %>
+    <p>
+      <%= link_to "Show this secure chat system", secure_chat_system %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New secure chat system", new_secure_chat_system_path %>

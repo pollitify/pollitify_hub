@@ -1,0 +1,11 @@
+<% content_for :title, "New event type" %>
+
+<h1>New event type</h1>
+
+<%= render "form", event_type: @event_type %>
+
+<br>
+
+<div>
+  <%= link_to "Back to event types", event_types_path %>
+</div>

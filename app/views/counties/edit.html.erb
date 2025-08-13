@@ -1,0 +1,12 @@
+<% content_for :title, "Editing county" %>
+
+<h1>Editing county</h1>
+
+<%= render "form", county: @county %>
+
+<br>
+
+<div>
+  <%= link_to "Show this county", @county %> |
+  <%= link_to "Back to counties", counties_path %>
+</div>

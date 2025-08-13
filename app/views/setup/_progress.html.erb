@@ -1,0 +1,8 @@
+<div class="progress my-3">
+  <% wizard_steps.each_with_index do |s, i| %>
+    <% progress = ((i + 1).to_f / wizard_steps.size) * 100 %>
+  <% end %>
+  <div class="progress-bar" role="progressbar" style="width: <%= ((wizard_steps.index(step) + 1).to_f / wizard_steps.size) * 100 %>%;">
+    Step <%= wizard_steps.index(step) + 1 %> of <%= wizard_steps.size %>
+  </div>
+</div>

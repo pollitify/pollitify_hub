@@ -1,0 +1,27 @@
+    <tr>
+      <% if Rails.env.development? || current_user && current_user.is_super_user?%>
+        <td scope="row"><%= event.id%></th>
+      <% end %>
+      <% if current_user && current_user.has_editing_privileges? %>   
+        <td scope="col" class="text-center " nowrap>
+          
+          
+          
+          <%=link_to('✏️', edit_event_path(event), title: "Edit this thing", class: "no-underline")%>
+          &nbsp;
+          <%#= button_to "🗑️", event_slot, method: :delete, title: "Destroy this thing" %> 
+          <%= link_to "🗑️", 
+              event_path(event),
+              method: :delete,
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+
+        </td>
+      <% end %>
+      <td class="text-center"><%= event.event_type.name %></td>
+      <td nowrap><%= event.date_start.strftime("%m-%d")%></td>
+      <td class="text-center"><%= event.time_start.strftime("%I:%M %p") %></td>
+      <td class="text-center"><%= event.time_end.strftime("%I:%M %p") if event.time_end %></td>
+      <td><%= link_to(event.name, event_path(event)) %></td>      
+      <td><%= event.location[0..40] %></td>
+      </td>
+    </tr>

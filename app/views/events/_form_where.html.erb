@@ -1,0 +1,40 @@
+  <fieldset>
+    <legend>
+      Where is the event happening?
+    </legend>
+    
+
+    <div class="mb-3">
+      <%= form.label :location, "Where is the event being held? (Ideally this is a street address but this might be something like 'Corner of 56th street and Meridian'; event places can be hard)",style: "display: block" %>
+      <%= form.text_field :location, style: "width: 100%;"  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :city, "What city is the event being held in?",style: "display: block" %>
+      <%= form.text_field :city, style: "width: 100%;"  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :state, "What state is the event being held in?",style: "display: block" %>
+      <%#= form.text_field :state, style: "width: 100%;"  %>
+      <%#= raise [@states, @event].inspect %>
+      <%= form.select :state_id,
+        options_from_collection_for_select(@states, :id, :name, @event.state_id),
+        { prompt: '' },
+        { class: 'form-select', style: 'width: 100%;' } %>
+    </div>
+
+
+<!--    <div class="mb-3">
+      <br/>
+      <%#= form.label :congressional_district, "What congressional district does this event fall into?", class: 'form-label', style: "width: 100%" %>
+      <%#= form.select :congressional_district_id, options_from_collection_for_select(@congressional_districts, :id, :full_name, @contact_card.try(:congressional_district_id)), {}, class: 'form-select', style: "width: 100%" %>
+      <%#= form.select :congressional_district_id, options_from_collection_for_select(@congressional_districts, :id, :full_name, @contact_card.try(:congressional_district_id)), include_blank: true, class: 'form-select', style: "width: 100%" %>
+
+      <%#= form.select :congressional_district_id,
+        options_from_collection_for_select(@congressional_districts, :id, :full_name, @contact_card.try(:congressional_district_id)),
+        { prompt: '' },
+        { class: 'form-select', style: 'width: 100%;' } %>
+
+    </div> -->
+  </fieldset>

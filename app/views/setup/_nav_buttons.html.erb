@@ -1,0 +1,9 @@
+<div class="d-flex justify-content-between text-center">
+  <% if previous_step %>
+    <%= link_to '⬅ Back', wizard_path(previous_step), class: "btn btn-outline-secondary text-center" %>
+  <% end %>
+  <div class="text-center">
+  <%= link_to "Next ➡", next_wizard_path, class: "btn btn-primary " %>
+</div>
+  <%#= f.submit(step == :finish ? "Finish" : "Next ➡", class: "btn btn-primary text-center") %>
+</div>

@@ -1,0 +1,69 @@
+<%= form_with model: @organization, url: wizard_path, method: :put do |f| %>
+<%= render 'progress' %>
+
+<fieldset>
+  <legend>
+    What is your name?
+  </legend>
+  
+  <div class="mb-3">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+  
+</fieldset>
+
+<fieldset>
+  <legend>
+    What is your email?
+  </legend>
+  
+  <div class="mb-3">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+  
+</fieldset>
+
+<fieldset>
+  <legend>
+    What is your username?
+  </legend>
+  
+  <div class="mb-3">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "form-control" %>
+  </div>
+
+  
+</fieldset>
+
+<fieldset>
+  <legend>
+    What is your password?
+  </legend>
+  
+  <div class="mb-3">
+    <%= f.label :password %>
+    <%= f.text_field :password, class: "form-control" %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.label :password_confirmation %>
+    <%= f.text_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  
+</fieldset>
+
+<% end %>
+<!--
+
+  <p>Actually need a finish button here</p>
+  <%#= render 'nav_buttons', f: f, previous_step: @organization.previous_step, next_step: @organization.next_step %>

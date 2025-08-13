@@ -1,0 +1,190 @@
+<h1 class="text-center">Welcome to setting up your <%=BASE_PRODUCT_NAME%> tools - 3</h1>
+<h2 class="text-center">Your Features</h1>
+<%=add_spacer%>
+<p><%=BASE_PRODUCT_NAME%> is <strong>feature rich</strong> software.  It is important to understand, however, that you don't have to use all the features.  You can choose now what features you want to have enabled for your <%=BASE_PRODUCT_NAME%> instance.  </p>
+<p>And, yes, you can change this down the road at any time.</p>
+<%=add_spacer%>
+<!--
+  <fieldset>
+    <legend>
+    </legend>
+  </fieldset>
+-->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const button = document.getElementById('check-all-btn');
+  if (button) {
+    button.addEventListener('click', function() {
+      const checkboxes = document.querySelectorAll('#fieldsets input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+  }
+});
+</script>
+<script>
+// Debug version - let's see what's happening
+function checkAllCheckboxes() {
+  console.log('Function called');
+  
+  const fieldsets = document.getElementById('fieldsets');
+  console.log('Fieldsets element:', fieldsets);
+  
+  if (!fieldsets) {
+    console.error('Element with id "fieldsets" not found!');
+    return;
+  }
+  
+  const checkboxes = fieldsets.querySelectorAll('input[type="checkbox"]');
+  console.log('Found checkboxes:', checkboxes.length, checkboxes);
+  
+  if (checkboxes.length === 0) {
+    console.error('No checkboxes found within fieldsets div');
+    return;
+  }
+  
+  checkboxes.forEach((checkbox, index) => {
+    console.log(`Checking checkbox ${index}:`, checkbox);
+    checkbox.checked = true;
+  });
+  
+  console.log('All checkboxes should now be checked');
+}
+
+// Alternative approach - wait for DOM to be ready
+function checkAllCheckboxesSafe() {
+  // Make sure DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkAllCheckboxes);
+  } else {
+    checkAllCheckboxes();
+  }
+}
+
+// Version with more robust element finding
+function checkAllCheckboxesRobust() {
+  // Try multiple ways to find the element
+  let fieldsets = document.getElementById('fieldsets');
+  
+  if (!fieldsets) {
+    // Maybe it's a class instead?
+    fieldsets = document.querySelector('.fieldsets');
+  }
+  
+  if (!fieldsets) {
+    // Try finding any div that might contain checkboxes
+    fieldsets = document.querySelector('div[id*="fieldset"]');
+  }
+  
+  if (!fieldsets) {
+    console.error('Cannot find fieldsets container');
+    return;
+  }
+  
+  const checkboxes = fieldsets.querySelectorAll('input[type="checkbox"]');
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+    // Dispatch both change and input events for maximum compatibility
+    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+    checkbox.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+}
+
+
+</script>
+
+<script>
+  function checkAllFieldsetCheckboxes() {
+    const checkboxes = document.querySelectorAll('#fieldsets input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+    });
+  }
+</script>
+
+<%= form_with model: @organization, url: wizard_path, method: :put do |f| %>
+<%= render 'progress' %>
+<p class="text-center">
+  <%#= primary_action_button "Turn On All Features", '', false%>
+  <%#= link_to("Turn On All Features",  class: 'btn btn-success', onclick: "checkAllCheckboxes()")%>
+  <%#= link_to("Turn On All Features", class: 'btn btn-success', onclick: "document.querySelectorAll('#fieldsets input[type=\"checkbox\"]').forEach(cb => cb.checked = true)")%>
+  <%#= button_tag "Check All", 
+      onclick: "document.querySelectorAll('#fieldsets input[type=\"checkbox\"]').forEach(cb => cb.checked = true)", 
+      class: "btn btn-primary" %>
+  <%#= button_tag "Check All", onclick: "checkAllCheckboxes()", class: "btn btn-primary" %>
+  <%#= button_tag "Check All", onclick: "checkAllCheckboxesDebug()", class: "btn btn-success" %>
+  <button type="button" id="check-checkboxes-button" onclick='checkAllFieldsetCheckboxes()' class="btn btn-success">Turn On All Features</button>
+  &nbsp;
+  --
+  &nbsp;
+  <%= link_to("Turn off All Features", '', class: 'btn btn-danger', onclick: "uncheckAllCheckboxes()")%>
+  <%#= primary_action_button "Turn Off All Features", ''%>
+</p>
+<% @feature_categories.each do |feature_category| %>
+  <div id="fieldsets">  
+    <fieldset>
+      <legend>
+        <%=feature_category.name %> Features
+      </legend>
+        <% feature_category.features.each do |feature| %>
+          <h2><%= f.check_box :foo, value: feature.fid%>&nbsp;<%=feature.name%></h2>
+          <%= feature.description %>
+        <% end %>
+    </fieldset>
+  </div>
+  <%=add_spacer%>
+<% end %>
+
+  <%= render 'nav_buttons', f: f, previous_step: @organization.previous_step, next_step: @organization.next_step %>
+
+<% end %>
+<%#=primary_action_button("Next", "/setup/features")%>
+
+<script>
+  function uncheckAllCheckboxes() {
+    const container = document.getElementById('fieldsets');
+    if (!container) return;
+
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = false;
+    });
+  }
+</script>
+  
+<script>
+  function checkAllCheckboxes() {
+    const container = document.getElementById('fieldsets');
+    if (!container) return;
+
+    const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = true;
+    });
+  }
+  function checkAllCheckboxes() {
+    const fieldsets = document.getElementById('fieldsets');
+    const checkboxes = fieldsets.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+    });
+  }
+  
+  // Alternative version that also triggers change events (useful if you have listeners)
+  function checkAllCheckboxesWithEvents() {
+    const fieldsets = document.getElementById('fieldsets');
+    const checkboxes = fieldsets.querySelectorAll('input[type="checkbox"]');
+  
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+      // Trigger change event in case other JavaScript is listening
+      checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  }
+</script>
+

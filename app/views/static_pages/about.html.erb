@@ -1,49 +1,25 @@
-<h1>About This Project</h1>
+<h1 class="text-center">About Pollitify</h1>
 
+<h2>Our Mission</h1>
 <div class='my-5'>
-  <p>It is built using <strong>Ruby on Rails</strong>, a powerful web development framework, and incorporates the <strong>Devise gem</strong> for secure and seamless user authentication. </p>
-  <p>Devise helps us manage user sign-ups, logins, password recovery, and other critical authentication features with minimal effort, ensuring your data and experience are secure. Whether you&#39;re a first-time user or a returning one, we’ve made it easy for you to access your account and interact with the platform in a hassle-free and secure manner.</p>
-  <h3 id="key-features">Key Features:</h3>
-  <ul>
-  <li><strong>User Authentication</strong>: With Devise, users can easily register, log in, and manage their accounts.</li>
-  <li><strong>Password Recovery</strong>: Forgot your password? No worries! Devise offers a simple and secure way to reset your password.</li>
-  <li><strong>Secure Sessions</strong>: Stay signed in or log out whenever you wish, knowing that your sessions are encrypted and protected.</li>
-  </ul>
-  <p>Our goal is to offer a smooth, secure, and enjoyable user experience, and we’ll continue improving and adding features to make this application even more powerful.</p>
-</div>
-
-<p>
-  Devise is a flexible authentication solution for Rails based on Warden. This guide outlines how to set up and configure Devise with its available feature options,
-  including <code>Authenticatable</code>, <code>Confirmable</code>, <code>DatabaseAuthenticatable</code>, <code>Lockable</code>, <code>Recoverable</code>, <code>Registerable</code>, <code>Rememberable</code>, <code>Timeoutable</code>, <code>Trackable</code>,
-  and <code>Validatable</code>.
-</p>
-
-<div class='alert alert-secondary'>
-  <h5>Add the Devise Gem</h5>
-  <p>
-    Follow the official Devise documentation for installation instructions:<br />
-    <a href="https://github.com/heartcombo/devise">Devise GitHub Repository</a>
-  </p>
-  <h4>Example: Using the <code>Validatable</code> Module</h4>
-  <p>
-    The <code>Validatable</code> module provides built-in email and password validations, such as format and length checks. By default, this module is included in Devise, so you don't need to add it manually unless you want to
-    customize the validation logic.
-  </p>
-  <p>To explicitly enable it, add the following to your model:</p>
-  <code>
-  <pre>
-# app/models/user.rb
-class User < ActiveRecord::Base
-  devise :validatable
-end</pre>
-  </code>
-  <h4>Customizing Devise Views</h4>
-  <p>Devise provides views for handling actions like sign-in, sign-up, and password resets. You can generate these views and customize them by running:</p>
-  <code>
-    <pre>rails generate devise:views</pre>
-  </code>
-  <p>This command will copy Devise's default views to your app under the <code>views/devise/</code> directory, where you can modify them as needed.</p>
-</div>
-
-<h4>Conclusion</h4>
-<p>This project uses the latest Bootstrap 5.3 features, including a dark theme mode and enhanced behaviors. For more details, refer to the <a href="/features">Features Page</a>.</p>
+  <p><%=BASE_PRODUCT_NAME%> is software built by <em>grass roots activists</em> for <em>grass roots activists</em>.  We aim to empower our fellow protestors by making grass roots activism easier and more powerful.</p>
+  <p>We have a very simple set of beliefs and goals:
+    
+    <ol>
+      <li>The Congress People have failed us.  
+      <li>The Senators have failed us.
+      <li>The courts have failed us.  
+      <li>The military has failed us.</li>
+      <li>The only hope left are the the people themselves.
+      <li>The only means is grass roots activism.
+      <li>We aim to let a thousand, thousand grass roots political events bloom.
+    </ol>
+<p><%=BASE_PRODUCT_NAME%> will help you create your events, run your events, manage your grass roots activism and so, so much more.  Want to do more as an activist?  Please take a serious look at <%=BASE_PRODUCT_NAME%>.  </p>
+  
+<!--  <p>If you are a small grass roots activism group of up to <%=USER_LIMIT%> members, <%=BASE_PRODUCT_NAME%> is free. Now you might say "well my group has 30 people, am I screwed?"  Honestly -- talk to us.  We are built by activists, for activists and we're pretty likely to cut you an exemption.  We are in this with you.  <br/>&nbsp;</p>
+   -->
+<h2>Our Team</h2>
+<div class='my-5'>
+<p>We used to be activists just like you, fellow protest nerds, out in the streets running events.  We stepped back from runnning events because we saw the potential in the software our CTO had created on his own and we wanted to help <strong>more</strong> events bloom.  At the state level we were working at, we saw that we could create maybe 20 events in a year -- and that wasn't enough to move the needle.  We felt (and still feel) that by making event creation, promotion and execution easier, we could do more for the movement.  And that's how we got here.</p>
+<p>Oh and making events easier, here's what we mean: Our leader executed our No King's Day Protest which brought 20,000 people out in the streets in only 2 days using our alpha software -- all by <strong>herself</strong>.  That's what <%=BASE_PRODUCT_NAME%> can do for you.</p>
+<p class="text-end">Thanks for looking at us -- Team Pollitify<br/>The <em>protest nerds</em> behind this software</p>

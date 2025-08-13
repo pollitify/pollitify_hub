@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
+  resources :counties
+  resources :cities
+  resources :congressional_districts
+  resources :events
+  resources :event_types
+  resources :states
+  resources :organizations
+  resources :secure_chat_systems
+  resources :features
+  resources :feature_categories
+  resources :domains
+  resources :setup
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "home/index"
 
-  %w[about contact faqs features].each do |page|
+  %w[about contact faqs product_features].each do |page|
     get page, to: "static_pages##{page}", as: page
   end
 
@@ -27,8 +40,17 @@ Rails.application.routes.draw do
       post "/create" => "users#create"
     end
   end
+  
+  get "suggest_event" => "home#suggest_event"
+  get "suggest_event_google_sheet" => "home#suggest_event_google_sheet"
+  get "suggest_event_mobilize_url" => "home#suggest_event_mobilize_url"
+  get "suggest_event_paste_text" => "home#suggest_event_paste_text"
+  get "suggest_event_upload_flier" => "home#suggest_event_upload_flier"
+  get "suggest_event_form" => "home#suggest_event_form"
 
   get "search" => "search#index"
+  
+  post "set_location", to: "locations#set_location"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -39,5 +61,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
+  #get "home#suggest"
   root "home#index"
 end

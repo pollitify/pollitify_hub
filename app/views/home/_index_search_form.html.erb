@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>
+    Search
+  </legend>
+  <p>I want to search for one or more of these:</p>
+  
+  <div class="container my-4">
+    <%= form_with url: organizations_path, method: :get, local: true, class: "row g-2 align-items-center" do %>
+      <div class="col-auto">
+        <%= label_tag :query, "Search", class: "col-form-label fw-bold" %>
+      </div>
+      <div class="col-auto">
+        <%= text_field_tag :query_city, @query_city, class: "form-control", placeholder: "City", style: "width: 100%"%>
+      </div>
+      <div class="col-auto">
+        <%= text_field_tag :query_county, @query_county, class: "form-control", placeholder: "County", style: "width: 100%"%>
+      </div>
+      <div class="col-auto">
+        <%= text_field_tag :query_state, @query_state, class: "form-control", placeholder: "State", style: "width: 100%"%>
+      </div>
+      <div class="col-auto">
+        <%= text_field_tag :query_name, @query_name, class: "form-control", placeholder: "Name", style: "width: 100%"%>
+      </div>
+      <div class="col-auto">
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  
+</fieldset>

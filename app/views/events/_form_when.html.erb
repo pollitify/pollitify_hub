@@ -1,0 +1,52 @@
+  <fieldset>
+    <legend>
+      When Does the Event Happen
+    </legend>
+
+    <div class="mb-3">
+      <%= form.label :date_start, "REQUIRED: What is the date that the event starts?", style: "display: block" %>
+      <%= form.date_field :date_start, style: "width: 100%;"  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :date_end, "What is the date that the event ends? (usually same day)", style: "display: block" %>
+      <%= form.date_field :date_end, style: "width: 100%;"  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :time_start, "What time does the event start?", style: "display: block" %>
+      <%= form.time_field :time_start, style: "width: 100%;"  %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :time_end,"What time does the event end?", style: "display: block" %>
+      <%= form.time_field :time_end, style: "width: 100%;"  %>
+    </div>
+    
+    <% if params[:suggest_event] == "1" || suggest_event == true %>
+      <!-- 
+        The setup time stuff is hidden for end users suggested events; too complex
+        -->
+    <% else %>
+      <div class="mb-3">
+        <%= form.label :time_setup,"What time does event SETUP start?",  style: "display: block" %>
+        <%= form.time_field :time_setup, style: "width: 100%;"  %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :time_teardown,"What time does event TEARDOWN start?", style: "display: block" %>
+        <%= form.time_field :time_teardown, style: "width: 100%;"  %>
+      </div>
+    <% end %>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateStart = document.getElementById("event_date_start");
+        const dateEnd = document.getElementById("event_date_end");
+
+        dateStart.addEventListener("input", function () {
+          dateEnd.value = dateStart.value;
+        });
+      });
+    </script>
+  </fieldset>

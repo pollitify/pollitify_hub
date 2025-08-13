@@ -1,0 +1,16 @@
+<h1>Preview CSV</h1>
+<%= form_with url: process_import_csv_imports_path, local: true do |f| %>
+  <table border="1">
+    <% @rows.each_with_index do |row, idx| %>
+      <tr>
+        <td>
+          <%= f.radio_button :header_row_index, idx %>
+        </td>
+        <% row.each do |cell| %>
+          <td><%= cell %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit "Use Selected Row as Headers" %>
+<% end %>

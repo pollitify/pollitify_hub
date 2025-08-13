@@ -1,0 +1,17 @@
+<h1 class="text-center">Welcome to setting up your <%=BASE_PRODUCT_NAME%> tools - 4</h1>
+<h2 class="text-center">Review Your Choices</h1>
+<%=add_spacer%>
+<p>You are about to setup your <%=BASE_PRODUCT_NAME%> instance.  Let's review your choices before we actually create the server you have requested.</p>
+<p>
+
+<%= form_with model: @organization, url: wizard_path, method: :put do |f| %>
+<%= render 'progress' %>
+<h3>Your Organization</h3>
+Here are your organization settings:
+<ol>
+  <li>Name: <%= @organization.name%></li>
+  <li>City: <%= @organization.city%></li>
+  <li>State: <%= @organization.state.name%></li>
+<h3>Your Domain</h3>
+<h3>Your Features</h4>
+<% end %>
