@@ -36,11 +36,11 @@ class User < ApplicationRecord
   # Copy
   # Edit
   # app/models/user.rb
-  Role.pluck(:name).each do |role_name|
-    define_method("#{role_name}?") do
-      has_role?(role_name)
-    end
-  end
+  # Role.pluck(:name).each do |role_name|
+  #   define_method("#{role_name}?") do
+  #     has_role?(role_name)
+  #   end
+  # end
   #Now you can call current_user.admin?, current_user.super_user?, etc.
 
   
