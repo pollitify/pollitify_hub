@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+bin/rails code:syntax
+
+source .env.production
+# SECRET_KEY_BASE=fdfasdfdasfdsa RAILS_ENV=production bundle exec rails assets:precompile
+# git add .
+# git commit -m "asset compiles"
+# git push origin main
+kamal deploy
+unset DATABASE_URL
