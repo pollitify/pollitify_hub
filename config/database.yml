@@ -1,6 +1,6 @@
 default: &default
-  #adapter: postgresql
-  adapter: postgis 
+  adapter: postgresql
+  #adapter: postgis 
   encoding: unicode
   pool: 5
   timeout: 5000

@@ -44,33 +44,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_094017) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.string "fid"
-    t.string "name_ascii"
-    t.string "state_fid"
-    t.string "state_name"
-    t.integer "county_fips"
-    t.string "county_name"
-    t.decimal "lat", precision: 10, scale: 6
-    t.decimal "lng", precision: 10, scale: 6
-    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
-    t.integer "population"
-    t.decimal "density"
-    t.string "source"
-    t.boolean "military"
-    t.boolean "incorporated"
-    t.string "timezone"
-    t.integer "ranking"
-    t.integer "external_fid"
-    t.bigint "state_id"
-    t.text "zips"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "county_id"
-    t.index ["county_id"], name: "index_cities_on_county_id"
-    t.index ["state_id"], name: "index_cities_on_state_id"
-  end
+# Could not dump table "cities" because of following StandardError
+#   Unknown type 'geography(Point,4326)' for column 'coordinates'
+
 
   create_table "congressional_districts", force: :cascade do |t|
     t.string "name"
@@ -82,23 +58,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_094017) do
     t.index ["state_id"], name: "index_congressional_districts_on_state_id"
   end
 
-  create_table "counties", force: :cascade do |t|
-    t.string "name"
-    t.string "name_ascii"
-    t.string "name_full"
-    t.string "county_fips"
-    t.bigint "state_id", null: false
-    t.string "state_abbreviation"
-    t.string "state_name"
-    t.decimal "lat", precision: 10, scale: 6
-    t.decimal "lng", precision: 10, scale: 6
-    t.geography "coordinates", limit: {srid: 4326, type: "st_point", geographic: true}
-    t.integer "population"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "zips"
-    t.index ["state_id"], name: "index_counties_on_state_id"
-  end
+# Could not dump table "counties" because of following StandardError
+#   Unknown type 'geography(Point,4326)' for column 'coordinates'
+
 
   create_table "domains", force: :cascade do |t|
     t.string "name"
@@ -216,6 +178,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_094017) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+    t.string "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string "srtext", limit: 2048
+    t.string "proj4text", limit: 2048
+    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
   end
 
   create_table "states", force: :cascade do |t|
