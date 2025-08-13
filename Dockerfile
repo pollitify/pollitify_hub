@@ -59,7 +59,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN HONEYBADGER_API_KEY=1 SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile 
+RUN DISABLE_DATABASE_ENVIRONMENT_CHECK=1 HONEYBADGER_API_KEY=1 SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile 
 
 
 RUN rm -rf node_modules
