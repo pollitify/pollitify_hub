@@ -102,7 +102,7 @@ gem 'ice_cube'
 # gem 'rails-observers'
 # gem 'merit'
 
-gem 'activerecord-postgis-adapter'
+###gem 'activerecord-postgis-adapter'
 gem 'rgeo' # handles geometry objects
 gem 'rgeo-activerecord'
 gem 'rgeo-geojson' 

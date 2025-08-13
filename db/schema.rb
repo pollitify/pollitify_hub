@@ -14,7 +14,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_094017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
-  enable_extension "postgis"
+  #enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
