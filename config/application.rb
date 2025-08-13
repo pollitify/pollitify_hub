@@ -1,5 +1,7 @@
 require_relative "boot"
 
+puts "DEBUG RAILS_MASTER_KEY: #{ENV['RAILS_MASTER_KEY'].inspect}"
+
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems

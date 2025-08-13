@@ -1,0 +1,4 @@
+#!/bin/bash
+source .env.production
+kamal setup
+unset DATABASE_URL
