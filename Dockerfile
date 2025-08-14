@@ -47,6 +47,9 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
+    
+# suggestion from claude
+COPY config/credentials.yml.enc config/credentials.yml.enc
 
 # Install node modules
 COPY package.json yarn.lock ./
