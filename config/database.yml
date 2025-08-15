@@ -18,6 +18,11 @@ development:
     <<: *default
     database: pollitify_hub_reporting_development
     host: localhost
+    
+  queue:
+    <<: *default
+    database: pollitify_hub_development
+    migrations_paths: db/queue_migrate
 
 test:
   <<: *default

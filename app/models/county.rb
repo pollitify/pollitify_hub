@@ -3,6 +3,8 @@ class County < ApplicationRecord
   has_many :cities
   has_many :events
   
+  attribute :coordinates, :string
+  
   IDENTITY_RELATIONSHIP = :all # could also be :all
   IDENTITY_COLUMNS = [:name, :state_id]
   include FindOrCreate

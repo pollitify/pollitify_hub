@@ -4,6 +4,8 @@ class City < ApplicationRecord
   
   has_many :events
   
+  attribute :coordinates, :string
+  
   IDENTITY_RELATIONSHIP = :all # could also be :all
   IDENTITY_COLUMNS = [:name, :fid]
   include FindOrCreate
