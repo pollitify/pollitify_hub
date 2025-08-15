@@ -37,8 +37,8 @@ test:
 production:
   adapter: postgresql
   
-cable:
-  <<: *production
+# cable:
+#   <<: *production
 
 # production:
 #   primary:
