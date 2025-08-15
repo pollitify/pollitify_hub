@@ -48,7 +48,7 @@ production: &production
 cable:
   <<: *production
   
-queue: 
+queue:
   <<: *production
   
 cache: 
