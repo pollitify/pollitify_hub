@@ -34,11 +34,14 @@ test:
 # NOTE: REQUIRED FOR DOCKERIZED ASSET COMPILATION
 # HERE THERE BE DRAGONS
 #
-production:
+production: &production
   adapter: postgresql
   
 # cable:
-#   <<: *production
+#   database: pollitify_hub_cable_production
+  
+cable:
+  <<: *production
 
 # production:
 #   primary:

@@ -91,6 +91,6 @@ Rails.application.configure do
   #
   # TURN OFF ACTION CABLE
   #
-  config.action_cable.mount_path = nil
-  config.action_cable.allowed_request_origins = []
+  # config.action_cable.mount_path = nil
+  # config.action_cable.allowed_request_origins = []
 end
