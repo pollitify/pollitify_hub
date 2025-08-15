@@ -14,9 +14,10 @@ class HomeController < ApplicationController
     #raise [city, state].inspect
     
     state, city, county = SearchQuery.get_objects("fishers", "IN")  
-    
-    @events = Event.where(state_id: state.id, county_id: county.id).ordered_by_date
-    raise @events.inspect
+    if Rails.env.development?
+      @events = Event.where(state_id: state.id, county_id: county.id).ordered_by_date
+      raise @events.inspect
+    end
     #@events = []
   end
   
