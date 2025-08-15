@@ -11,7 +11,7 @@ class CreateCounties < ActiveRecord::Migration[8.0]
       t.string :state_name
       t.decimal :lat, precision: 10, scale: 6
       t.decimal :lng, precision: 10, scale: 6
-      t.st_point :coordinates, geographic: true, has_z: false
+      #t.st_point :coordinates, geographic: true, has_z: false
       t.integer :population
 
       t.timestamps
