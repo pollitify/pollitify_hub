@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Check if a pattern was provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <pattern>"
+  exit 1
+fi
+
+PATTERN="$1"
+
+git status --porcelain | grep "$PATTERN" | awk '{print $2}' | xargs git add
