@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       @events = Event.where(state_id: state.id, county_id: county.id).ordered_by_date
       raise @events.inspect
     end
-    #@events = []
+    @events = []
   end
   
   def suggest
