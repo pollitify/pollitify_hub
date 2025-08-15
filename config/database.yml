@@ -45,6 +45,9 @@ cable:
   
 queue: 
   <<: *production
+  
+cache: 
+  <<: *production
 
 # production:
 #   primary:
