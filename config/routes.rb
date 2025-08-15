@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "home/index"
+  
+  get "landing/index"
 
   %w[about contact faqs product_features].each do |page|
     get page, to: "static_pages##{page}", as: page
@@ -62,5 +64,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   #get "home#suggest"
-  root "home#index"
+  #root "home#index"
+  root "landing#index"
 end

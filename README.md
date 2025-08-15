@@ -1,6 +1,12 @@
 
 # Rails 8 Authentication with Bootstrap 5 and Devise Gem
 
+NOTE: TO MAKE THIS FUNCTION WITH BIN/DEV
+
+1. run: source .env.production
+2. run: unset DATABASE_URL
+3. run: bin/dev 
+
 This is a simple Rails 8 application that implements authentication using the popular `devise` gem along with Bootstrap 5 for styling. This project provides an easy-to-use authentication system with features like user registration, login, logout, and password management.
 
 ## Features
