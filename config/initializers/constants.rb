@@ -10,6 +10,10 @@ TAG_LINES = [
   "Tools for Grass Roots Activism :: Share, Promote, Create",
   "Where Movements Meet Momentum",
   "Pollitify Progressive Politics",
-  "People Power Pollitify"
+  "People Power Pollitify", 
+  "Power Tools for Progressives",
+  "Tools for Progressive People", 
+  "Pollitify :: Share, Create, Activate", 
+  "Pollitify :: something about being a social network"
 ]
 USER_LIMIT = 25
