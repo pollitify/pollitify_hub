@@ -16,9 +16,11 @@ class HomeController < ApplicationController
     state, city, county = SearchQuery.get_objects("fishers", "IN")  
     if Rails.env.development?
       @events = Event.where(state_id: state.id, county_id: county.id).ordered_by_date
-      raise @events.inspect
+      #raise @events.inspect
     end
-    @events = []
+    #@events = []
+    @date = Date.today
+    @news_feed_items = NewsFeedItem.ordered_by_date
   end
   
   def suggest

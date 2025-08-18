@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" class="text-center"><!-- VOTE UP --></th>
+      <th scope="col" class="text-center"><!-- VOTE DOWN --></th>
+      <th scope="col" class="text-center"><!-- COMMENT --></th>
+      <th scope="col" class="text-center"><!-- SEE CLUSTER --></th>
+      <th scope="col" class="text-center"><!-- SOURCE --></th>
+      <th scope="col" class="text-center"><!-- TITLE AND BODY--></th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% @news_feed_items.each do |news_feed_item| %>
+  <tr>
+    <td scope="col"><span><i class="bi bi-arrow-up"></i><%=news_feed_item.get_upvotes.size%></span></td>
+    <td scope="col"><span><i class="bi bi-arrow-down"></i><%=news_feed_item.get_downvotes.size%></span></td>
+    <td scope="col"><span><i class="bi bi-chat-dots"></i><%=news_feed_item.comments.size%></span></td>
+    <td scope="col"></td>
+    <td scope="col"></td>
+    <td scope="col">
+      <h2>
+        <%=link_to(news_feed_item.title.html_safe, news_feed_item_path(news_feed_item)) %>
+      </h2>
+      <%=news_feed_item.summary.html_safe%>
+    </td>    
+<% end %>
+
+  </tbody>
+</table>
+
+<div class="d-flex align-items-center gap-3">
+  
+  
+  
+</div>

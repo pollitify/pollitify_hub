@@ -3,10 +3,14 @@
 <div id="tagline"><p class="text-center"><em><%=TAG_LINES.sample%></em></p></div>
 <div class='my-5'>
   <p>
-    <%=BASE_PRODUCT_NAME%> is your one stop source for <em>grass roots activism</em>.  We both list events near you as well as offering you a suite of software tools for creating and organizing political protests.</p>    
-    <p>If reasoning by analogy works for you, you can think of us as <%=link_to('Mobilize', 'https://mobilize.us/')%> with the difference that not only are we <strong>free</strong> but we also offer you the tools for putting on protests not just promoting an event.</p>
+    <%=BASE_PRODUCT_NAME%> is your one stop source for <em>grass roots activism</em>.  We both list events near you as well as offering you a suite of software tools for creating and organizing political protests. If reasoning by analogy works for you, you can think of us as <%=link_to('Mobilize', 'https://mobilize.us/')%> with the difference that not only are we <strong>free</strong> but we also offer you the tools for putting on protests not just promoting an event.</p>
   </p>
 </div>
+<%= render 'tabs'%>
+<%#= raise @events.inspect %>
+<%= render 'tab_content', events: @events%>
+
+
 <div id="suggest_button">
 <p class="text-center">
 <%=primary_action_button("Suggest an Event / Add Your Event", suggest_event_path)%>
@@ -24,14 +28,7 @@
     </button>
   </div>
 </div>
-<div id="events">
-  <%= render 'events_header' %>
-  
-  <% @events.each do |event| %>
-    <%= render 'events', {event: event} %>
-  <% end %>
-  <%= render 'events_footer' %>
-</div>
+
 
 <% if signed_in? && current_user.admin? %>
   <%= render 'home/dashboard' %>
