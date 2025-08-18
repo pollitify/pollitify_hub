@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_18_201833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
-  enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +69,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
     t.bigint "county_id"
     t.index ["county_id"], name: "index_cities_on_county_id"
     t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "news_feed_item_id", null: false
+    t.index ["news_feed_item_id"], name: "index_comments_on_news_feed_item_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "congressional_districts", force: :cascade do |t|
@@ -174,6 +183,55 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
     t.string "status"
     t.boolean "active", default: true
     t.index ["feature_category_id"], name: "index_features_on_feature_category_id"
+  end
+
+  create_table "feed_items", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.text "summary"
+    t.datetime "published_at"
+    t.string "guid"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guid"], name: "index_feed_items_on_guid"
+    t.index ["url"], name: "index_feed_items_on_url", unique: true
+  end
+
+  create_table "google_sheet_urls", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.text "options"
+    t.datetime "last_checked_at"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_google_sheet_urls_on_user_id"
+  end
+
+  create_table "news_feed_items", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.text "summary"
+    t.datetime "published_at"
+    t.string "guid"
+    t.string "source"
+    t.bigint "news_feed_url_id"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "permalink"
+    t.index ["news_feed_url_id"], name: "index_news_feed_items_on_news_feed_url_id"
+  end
+
+  create_table "news_feed_urls", force: :cascade do |t|
+    t.string "name"
+    t.string "rss_url"
+    t.datetime "last_checked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -342,14 +400,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
-  end
-
   create_table "states", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -407,10 +457,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.string "votable_type"
+    t.bigint "votable_id"
+    t.string "voter_type"
+    t.bigint "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "value"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "counties"
   add_foreign_key "cities", "states"
+  add_foreign_key "comments", "news_feed_items"
+  add_foreign_key "comments", "users"
   add_foreign_key "congressional_districts", "states"
   add_foreign_key "counties", "states"
   add_foreign_key "event_types", "organizations"
@@ -420,6 +489,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_122749) do
   add_foreign_key "events", "event_types"
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "states"
+  add_foreign_key "google_sheet_urls", "users"
+  add_foreign_key "news_feed_items", "news_feed_urls"
   add_foreign_key "organizations", "domains"
   add_foreign_key "organizations", "secure_chat_systems"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
