@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  resources :google_sheet_urls
+  
+  #
+  # BCG TODO ADD LOGIN REQUIREMENT FOR THIS
+  #
+  require "sidekiq/web"
+  Rails.application.routes.draw do
+  resources :google_sheet_urls
+    mount Sidekiq::Web => "/sidekiq"
+  end
+  
+  #resources :news_feed_items
+  resources :news_feed_urls
   resources :counties
   resources :cities
   resources :congressional_districts
@@ -17,6 +30,30 @@ Rails.application.routes.draw do
   get "home/index"
   
   get "landing/index"
+
+  
+  resources :news_feed_items do
+    member do
+      patch :upvote
+      patch :downvote
+    end
+    # member do
+    #   #put 'upvote'
+    #   #put 'downvote'
+    #   post 'upvote'
+    #   post 'downvote'
+    # end
+    # member do
+    #   put "upvote", to: "news_feed_items#upvote"
+    #   put "downvote", to: "news_feed_items#downvote"
+    # end
+    resources :comments, only: %i[create destroy]
+  end
+  
+  # resources :news_feed_items do
+  #   resources :votes, only: [:create]
+  #   resources :comments, only: [:create, :destroy]
+  # end
 
   %w[about contact faqs product_features].each do |page|
     get page, to: "static_pages##{page}", as: page
