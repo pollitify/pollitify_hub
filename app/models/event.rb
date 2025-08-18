@@ -26,6 +26,10 @@ class Event < ApplicationRecord
     sortable_attributes [:date_start_at, :city]
   end
   
+  def event_start_at
+    return self.send(:date_start_at) if self.date_start_at
+    return Date.today
+  end
   
   
 end
