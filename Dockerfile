@@ -32,7 +32,7 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential nano git node-gyp pkg-config python-is-python3 postgresql-client postgresql-contrib libpq-dev imagemagick  libmagickwand-dev sudo && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
+    
 # Install JavaScript dependencies
 ARG NODE_VERSION=22.14.0
 ARG YARN_VERSION=1.22.22
