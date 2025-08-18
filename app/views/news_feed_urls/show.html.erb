@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @news_feed_url %>
+
+<div>
+  <%= link_to "Edit this news feed url", edit_news_feed_url_path(@news_feed_url) %> |
+  <%= link_to "Back to news feed urls", news_feed_urls_path %>
+
+  <%= button_to "Destroy this news feed url", @news_feed_url, method: :delete %>
+</div>

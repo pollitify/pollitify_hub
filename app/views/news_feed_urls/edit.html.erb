@@ -1,0 +1,12 @@
+<% content_for :title, "Editing news feed url" %>
+
+<h1>Editing news feed url</h1>
+
+<%= render "form", news_feed_url: @news_feed_url %>
+
+<br>
+
+<div>
+  <%= link_to "Show this news feed url", @news_feed_url %> |
+  <%= link_to "Back to news feed urls", news_feed_urls_path %>
+</div>
