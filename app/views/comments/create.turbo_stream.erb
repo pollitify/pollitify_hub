@@ -1,0 +1,7 @@
+<%= turbo_stream.append "news_feed_item_#{@news_feed_item.id}_comments" do %>
+  <%= render @comment %>
+<% end %>
+
+<%= turbo_stream.replace "new_comment_form_feed_item_#{@news_feed_item.id}" do %>
+  <%= render "comments/form", news_feed_item: @news_feed_item, comment: Comment.new %>
+<% end %>

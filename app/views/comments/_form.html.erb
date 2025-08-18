@@ -1,0 +1,7 @@
+<!-- app/views/comments/_form.html.erb -->
+<%= form_with model: [news_feed_item, comment], id: "new_comment_form_news_feed_item_#{news_feed_item.id}" do |f| %>
+  <div class="input-group mb-3">
+    <%= f.text_field :body, class: "form-control", placeholder: "Add a comment..." %>
+    <button class="btn btn-outline-secondary" type="submit">Post</button>
+  </div>
+<% end %>
