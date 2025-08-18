@@ -1,0 +1,2 @@
+module GoogleSheetUrlsHelper
+end

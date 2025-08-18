@@ -1,0 +1,57 @@
+<%= form_with(model: google_sheet_url) do |form| %>
+  <% if google_sheet_url.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(google_sheet_url.errors.count, "error") %> prohibited this google_sheet_url from being saved:</h2>
+
+      <ul>
+        <% google_sheet_url.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<!--
+  <fieldset>
+    <legend>
+    </legend>
+  </fieldset>
+-->
+
+  <fieldset>
+    <legend>
+      The Basics
+    </legend>
+    <div>
+      <%= form.label :name, "Name of the Google Sheet / Organizing Group that Put it Together", style: "display: block; width: 100%" %>
+      <%= form.text_field :name, style: "width: 100%" %>
+    </div>
+
+    <div>
+      <%= form.label :url, style: "display: block" %>
+      <%= form.text_field :url, style: "width: 100%" %>
+    </div>
+    
+  </fieldset>
+
+  <% if current_user && current_user.is_admin? %>
+  <fieldset>
+    <legend>
+      Parsing Options
+    </legend>
+    
+    <div>
+      <%= form.label :options, style: "display: block" %>
+      <%= form.textarea :options %>
+    </div>  
+  </fieldset>
+  <% end %>
+  
+  <div>
+    <p class="text-center">Please note that your Google Sheet url will be submitted immediately but it may take some time to get loaded.</p>
+        <p class="text-center">
+      <%= form.submit%>
+    </p>
+
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing google sheet url" %>
+
+<h1>Editing google sheet url</h1>
+
+<%= render "form", google_sheet_url: @google_sheet_url %>
+
+<br>
+
+<div>
+  <%= link_to "Show this google sheet url", @google_sheet_url %> |
+  <%= link_to "Back to google sheet urls", google_sheet_urls_path %>
+</div>

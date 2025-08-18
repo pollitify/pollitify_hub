@@ -1,0 +1,18 @@
+    <tr>
+      
+      <% if current_user && current_user.is_admin? %>      
+        <td scope="row">
+          <%= google_sheet_url.id%>
+        </th>
+        <td scope="row">
+          <%= link_to('✏️', edit_google_sheet_url_path(google_sheet_url), class: "no-underline")%> 
+        </td>
+        <td scope="row">
+          <%= button_to "🗑️", google_sheet_url, method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: "unstyled-button" if current_user && current_user.has_destroy_rights?(google_sheet_url)%>
+        </td>
+      <% end %>
+        
+      <td><%= link_to(google_sheet_url.name.html_safe, google_sheet_url_path(google_sheet_url)) %></td>      
+      <td><%= google_sheet_url.last_checked_at%></td>
+      <td><%= google_sheet_url.try(:user).try(:full_name)%></td>
+    </tr>

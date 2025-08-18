@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @google_sheet_url %>
+
+<div>
+  <%= link_to "Edit this google sheet url", edit_google_sheet_url_path(@google_sheet_url) %> |
+  <%= link_to "Back to google sheet urls", google_sheet_urls_path %>
+
+  <%= button_to "Destroy this google sheet url", @google_sheet_url, method: :delete %>
+</div>

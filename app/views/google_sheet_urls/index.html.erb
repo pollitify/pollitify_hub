@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Google sheet urls" %>
+
+<h1>Google sheet urls</h1>
+
+<div id="google_sheet_urls">
+  <%= render 'google_sheet_urls_header' %>
+  <% @google_sheet_urls.each do |google_sheet_url| %>
+    <%= render 'google_sheet_urls', {google_sheet_url: google_sheet_url} %>
+  <% end %>
+  <%= render 'google_sheet_urls_footer' %>
+</div>
+
+
+<%= link_to "New google sheet url", new_google_sheet_url_path %>
