@@ -30,5 +30,17 @@ module ApplicationHelper
     "#{base}?title=#{title}&body=#{body}"
   end
   
+  def show_event_type(event)
+    return event.event_type.name if event.event_type
+    return event.event_type_name
+  end
+  
+  def show_event_date(event)
+    #raise event.inspect
+    return event.date_start_at.strftime("%m-%d") if event.date_start_at
+    return event.source_data["Date"]
+    #event.date_start.strftime("%m-%d")
+  end
+  
   
 end
