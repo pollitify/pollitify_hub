@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# 
+# Example usage
+#
+#bin/copy_motion.sh bank_deposits
+
+# Check if a pattern was provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filespec>"
+  exit 1
+fi
+
+PATTERN="$1"
+
+cp /Users/sjohnson/Sync/coding/rails8_take4/polly/app/views/motions/_motions.html.erb app/views/"$PATTERN"/_"$PATTERN".html.erb
+cp /Users/sjohnson/Sync/coding/rails8_take4/polly/app/views/motions/_motions_header.html.erb app/views/"$PATTERN"/_"$PATTERN"_header.html.erb
+cp /Users/sjohnson/Sync/coding/rails8_take4/polly/app/views/motions/_motions_footer.html.erb app/views/"$PATTERN"/_"$PATTERN"_footer.html.erb
+
+#git status --porcelain | grep "$PATTERN" | awk '{print $2}' | xargs git add
