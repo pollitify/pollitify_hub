@@ -1,0 +1,4 @@
+<!-- app/views/votes/create.turbo_stream.erb -->
+<%= turbo_stream.replace "news_feed_item_#{@news_feed_item.id}_votes" do %>
+  <%= render "news_feed_items/votes", news_feed_item: @news_feed_item %>
+<% end %>
