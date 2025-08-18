@@ -1,0 +1,2 @@
+module NewsFeedItemsHelper
+end

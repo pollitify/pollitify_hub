@@ -1,0 +1,23 @@
+<!-- app/views/@news_feed_items/_@news_feed_item.html.erb -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= @news_feed_item.title %></h5>
+    <p class="card-text"><%= @news_feed_item.summary.html_safe %></p>
+    <p class="text-center"><%= link_to("View Full Article", @news_feed_item.permalink, class: "btn btn-primary")%></p>
+    
+    <!-- bcgfix1 -->
+    <%= render "votes", news_feed_item: @news_feed_item %>
+
+    <!-- Comments -->
+    <div class="mt-3">
+      <h4>Comments</h4>
+      <div id="@news_feed_item_<%= @news_feed_item.id %>_comments">
+        <%= render @news_feed_item.comments %>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= render "comments/form", comment: Comment.new, news_feed_item: @news_feed_item %>      
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<!-- app/views/news_feed_items/_votes.html.erb -->
+<div id="news_feed_item_<%= news_feed_item.id %>_votes" class="d-flex align-items-center mb-2">
+  <%#= button_to news_feed_item_votes_path(news_feed_item, value: 1), method: :post, class: "btn btn-sm btn-success me-1" do %>
+  <%= button_to upvote_news_feed_item_path(news_feed_item, value: 1), method: :post, class: "btn btn-sm btn-success me-1" do %>
+    <i class="bi bi-hand-thumbs-up"></i> <%= news_feed_item.get_upvotes.size %>
+  <% end %>
+  <%#= button_to news_feed_item_votes_path(news_feed_item, value: -1), method: :post, class: "btn btn-sm btn-danger me-2" do %>
+  &nbsp;&nbsp;<%= button_to downvote_news_feed_item_path(news_feed_item, value: -1), method: :post, class: "btn btn-sm btn-danger me-2" do %>
+    <i class="bi bi-hand-thumbs-down"></i> <%= news_feed_item.get_downvotes.size %>
+  <% end %>
+
+  <span class="badge bg-secondary">Score: <%= news_feed_item.score %></span>
+</div>

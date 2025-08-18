@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "News feed items" %>
+
+<h1>News feed items</h1>
+
+<div id="news_feed_items">
+  <% @news_feed_items.each do |news_feed_item| %>
+    <%= render news_feed_item %>
+    <p>
+      <%= link_to "Show this news feed item", news_feed_item %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New news feed item", new_news_feed_item_path %>
