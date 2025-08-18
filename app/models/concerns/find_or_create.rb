@@ -72,6 +72,7 @@ module FindOrCreate
         end
         where_clause = where_clauses.reduce Hash.new, :merge
         thing = self.where(where_clause).first
+        #debugger
         if thing
           return 200, thing
         else
