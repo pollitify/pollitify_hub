@@ -112,3 +112,12 @@ gem "meilisearch-rails"
 gem 'chronic'
 
 gem 'geocoder'
+gem "feedjira", "~> 3.2"
+
+#
+# jobs
+#
+gem "sidekiq", "~> 8.0"
+gem "sidekiq-cron", "~> 2.3"
+
+gem "rails-controller-testing", "~> 1.0"

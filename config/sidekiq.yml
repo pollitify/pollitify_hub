@@ -1,0 +1,11 @@
+:concurrency: 5
+:queues:
+  - default
+  - mailers
+
+:schedule:
+  crawl_news_feed:
+    cron: "0 * * * *" # every hour
+    class: "CrawlAllFeedsJob"
+    args:
+      - "https://example.com/feed.rss"

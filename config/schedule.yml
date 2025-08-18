@@ -1,0 +1,33 @@
+crawl_news_feeds:
+  cron: "0 * * * *"   # every 60 minutes
+  class: "CrawlNewsFeeds"
+  
+# Runs every minute
+log_heartbeat:
+  cron: "* * * * *"
+  class: "LogHeartbeatJob"
+  queue: default
+
+# Runs every 5 minutes
+cleanup_temp_files:
+  cron: "*/5 * * * *"
+  class: "CleanupTempFilesJob"
+  queue: default
+
+# Runs every hour at minute 0
+# hourly_report:
+#   cron: "0 * * * *"
+#   class: "HourlyReportJob"
+#   queue: reports
+
+# Runs every day at 2:30am
+# nightly_maintenance:
+#   cron: "30 2 * * *"
+#   class: "NightlyMaintenanceJob"
+#   queue: maintenance
+
+# Runs every Monday at 8am
+# weekly_digest:
+#   cron: "0 8 * * 1"
+#   class: "WeeklyDigestJob"
+#   queue: mailers
