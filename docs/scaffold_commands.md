@@ -1,5 +1,18 @@
 # Scaffold Commands
 
+rails g scaffold GoogleSheetUrl name:string url:string options:text last_checked_at:datetime ip_address:string user_agent:string user:references
+
+bin/rails generate scaffold NewsFeedItem \
+  title:string \
+  url:string:uniq \
+  summary:text \
+  published_at:datetime \
+  guid:string:index \
+  source:string \
+  news_feed_url:references \
+  image_url:string
+
+rails g model FeedItem title:string url:string:uniq summary:text published_at:datetime guid:string:index image_url:string 
  "county","county_ascii","county_full","county_fips","state_id","state_name","lat","lng","population"
 rails g scaffold name:string name_ascii:string name_full:string county_fips:string state:references state_abbreviation:string state_name:string lat:decimal lng:decimal coordinates:string population:integer 
 
