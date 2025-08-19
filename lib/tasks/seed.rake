@@ -19,6 +19,7 @@ namespace :seed do
     Rake::Task["cities:set_county_id"].invoke
     ###Rake::Task["users:init"].invoke
     Rake::Task["google_sheet_urls:init"].invoke
+    Rake::Task["news_feed_urls:init"].invoke
     
     #Rake::Task["users:seed"].invoke
     
