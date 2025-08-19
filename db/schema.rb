@@ -73,10 +73,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_18_201833) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "news_feed_item_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "news_feed_item_id", null: false
     t.index ["news_feed_item_id"], name: "index_comments_on_news_feed_item_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
