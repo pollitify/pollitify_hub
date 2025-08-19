@@ -1,5 +1,18 @@
 class NewsFeedItemsController < ApplicationController
-  before_action :set_news_feed_item, only: %i[ show edit update destroy ]
+  before_action :set_news_feed_item, only: %i[ show edit update destroy upvote downvote]
+  
+  #before_action :set_feed_item, only: %i[upvote downvote]
+
+  def upvote
+    @news_feed_item.upvote_by current_user
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    @news_feed_item.downvote_by current_user
+    redirect_back(fallback_location: root_path)
+  end
+
 
   # GET /news_feed_items or /news_feed_items.json
   def index
