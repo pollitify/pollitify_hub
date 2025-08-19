@@ -46,8 +46,13 @@ class User < ApplicationRecord
   #Now you can call current_user.admin?, current_user.super_user?, etc.
 
   def self.scott
-    User.where(email: "fuzzygroup@gmail.com").first
+    User.where(username: 'fuzzygroup').first
   end
+
+  def self.fuzzygroup
+    User.where(username: 'fuzzygroup').first
+  end
+
   
   def has_role?(role_name)
     roles.exists?(name: role_name.to_s)
