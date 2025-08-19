@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   
   resources :news_feed_items do
     member do
-      patch :upvote
-      patch :downvote
+      post :upvote
+      post :downvote
     end
     # member do
     #   #put 'upvote'
