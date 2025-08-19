@@ -13,7 +13,7 @@ namespace :seed do
     Rake::Task["features:init"].invoke
     Rake::Task["secure_chat_systems:init"].invoke
     Rake::Task["states:init"].invoke
-    Rake::Task["organizations:init"].invoke
+    #Rake::Task["organizations:init"].invoke
     Rake::Task["cities:init"].invoke
     Rake::Task["counties:init"].invoke
     Rake::Task["cities:set_county_id"].invoke

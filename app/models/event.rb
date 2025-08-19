@@ -16,14 +16,15 @@ class Event < ApplicationRecord
   
   scope :ordered_by_date, -> { order(date_start_at: :desc) }
   
-  
-  include MeiliSearch::Rails
-  meilisearch do
-    # all attributes will be sent to Meilisearch if block is left empty
-    displayed_attributes ['id', 'name', 'city', 'state']
-    searchable_attributes ['name', 'description', 'city', 'location', 'state']
-    #filterable_attributes ['user_id']
-    sortable_attributes [:date_start_at, :city]
+  if Rails.env.development? 
+    include MeiliSearch::Rails
+    meilisearch do
+      # all attributes will be sent to Meilisearch if block is left empty
+      displayed_attributes ['id', 'name', 'city', 'state']
+      searchable_attributes ['name', 'description', 'city', 'location', 'state']
+      #filterable_attributes ['user_id']
+      sortable_attributes [:date_start_at, :city]
+    end
   end
   
   def event_start_at
