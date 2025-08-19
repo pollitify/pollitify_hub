@@ -16,7 +16,7 @@ class NewsFeedItemsController < ApplicationController
 
   # GET /news_feed_items or /news_feed_items.json
   def index
-    @news_feed_items = NewsFeedItem.all
+    @news_feed_items = NewsFeedItem.ordered_by_date.page(params[:page])
   end
 
   # GET /news_feed_items/1 or /news_feed_items/1.json
