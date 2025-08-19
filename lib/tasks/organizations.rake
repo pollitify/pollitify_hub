@@ -53,7 +53,7 @@ namespace :organizations do
       secure_chat_system_id: SecureChatSystem.signal.id,
       billing: 'free',
       city: 'fishers',
-      state_id: State.indiana.first.id,
+      state_id: State.indiana.id,
       organization_website_url: 'https://www.sosindiana.com/',
       organization_website_domain: 'sosindiana.com',
       your_domain_or_ours: 'yours',
