@@ -1,3 +1,9 @@
+
+In a Rails 8 application using a model called NewsFeedItem, can you give me an example of using Kaminari for pagination
+
+I have a Rails 8 application with acts_as_votable installed and I am having problems with upvote and downvote on the model NewFeedItem. Nothing appears in the rails log when I click on upvote or downvote
+
+
 In Ruby 3.4, I have a regular expression:
 
 ([0-9]+ *- *[0-9]+ [AP][M])
