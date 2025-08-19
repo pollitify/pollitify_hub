@@ -10,4 +10,8 @@ class Domain < ApplicationRecord
   def self.pollitify
     Domain.where(name: 'pollitify.com').first
   end
+  
+  def self.your_own_domain
+    Domain.where(name: 'YOUR_OWN_DOMAIN').first
+  end
 end

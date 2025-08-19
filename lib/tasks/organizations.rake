@@ -31,6 +31,12 @@ namespace :organizations do
     organizations << OpenStruct.new(
       name: "Team",
       fid: "team",
+      first_name: "Scott",
+      last_name: "Johnson",
+      email: "fuzzygroup@gmail.com",
+      password: "foo1234",
+      password_confirmation: "foo1234",
+      username: "fuzzygroup",
       active: true,
       secure_chat_system_id: SecureChatSystem.signal.id,
       billing: 'free',
@@ -38,16 +44,23 @@ namespace :organizations do
       state_id: State.indiana.id,
       organization_website_url: 'https://www.pollitify.com',
       organization_website_domain: 'pollitify.com',
-      your_domain_or_ours: 'ours',
+      use_pollitify_base_domain: true,
       domain_id: Domain.pollitify.id,
       sub_domain: 'team',
       polly_domain: 'team.pollitify.com',
       polly_url: 'https://team.pollitify.com',
-      features: ""
+      features: "{}",
+      domain_id: Domain.pollitify.id
     )
     
     organizations << OpenStruct.new(
       name: "Blythe Potter Save Our State",
+      first_name: "Blythe",
+      last_name: "Potter",
+      email: "fuzzygroup@gmail.com",
+      password: "foo1234",
+      password_confirmation: "foo1234",
+      username: "blythe",
       fid: "sosindiana",
       active: true,
       secure_chat_system_id: SecureChatSystem.signal.id,
@@ -56,12 +69,13 @@ namespace :organizations do
       state_id: State.indiana.id,
       organization_website_url: 'https://www.sosindiana.com/',
       organization_website_domain: 'sosindiana.com',
-      your_domain_or_ours: 'yours',
+      use_pollitify_base_domain: false,
       domain_id: nil,
       sub_domain: 'pollitify',
       polly_domain: 'pollitify.sosindiana.com',
       polly_url: 'https://pollitify.sosindiana.com',
-      features: ""
+      features: "{}",
+      domain_id: Domain.your_own_domain.id
     )
     
     add_organizations(organizations)

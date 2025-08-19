@@ -16,6 +16,7 @@ namespace :domains do
     all_domains << "pollitify.org"
     all_domains << "pollytical.org"
     all_domains << "pollytics.org"
+    all_domains << "YOUR_OWN_DOMAIN"
     
     all_domains = all_domains.sort
     
