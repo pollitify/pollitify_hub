@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       #raise @events.inspect
       #@events = []
     @date = Date.today
-    @news_feed_items = NewsFeedItem.ordered_by_date.page(params[:page])
+    @news_feed_items = NewsFeedItem.ordered_by_date.page(params[:page]).per(NEWS_FEED_PAGINATION_COUNT)
   end
   
   def suggest

@@ -23,6 +23,7 @@
         <%=link_to(news_feed_item.title.html_safe, news_feed_item_path(news_feed_item)) %>
       </h2>
       <%=news_feed_item.summary.html_safe%>
+      <p class="text-end"><strong><%=news_feed_item.published_at%></strong></p>
     </td>    
 <% end %>
 

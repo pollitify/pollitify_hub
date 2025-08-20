@@ -2,6 +2,7 @@ PRODUCT_NAME = "Pollitify Hub"
 BASE_PRODUCT_NAME = "Pollitify"
 TAG_LINE = "Your Source for Grass Roots Political Activism"
 PAGINATION_COUNT = 25
+NEWS_FEED_PAGINATION_COUNT = 50
 TAG_LINES = [
   "pollitify.com :: Your home for grassroots movements for your community activism",
   "Your home for grassroots political activism",

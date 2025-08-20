@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "home/index"
+
   
   get "landing/index"
 
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
   #   resources :comments, only: [:create, :destroy]
   # end
 
-  %w[about contact faqs product_features].each do |page|
+  %w[about contact faqs product_features changelog].each do |page|
     get page, to: "static_pages##{page}", as: page
   end
 
