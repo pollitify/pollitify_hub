@@ -1,4 +1,9 @@
 namespace :events do
+  #
+  # WHAT THE FUCK IS THIS AND IS IT USEFUL
+  #
+  # webcal://p109-caldav.icloud.com/published/2/NTY4MDE4NDAzNTY4MDE4NO2HPZQpyWT5ScGfZqdCJeF5GD-qD9KCNorqGzJOnFaLjcWo-87UCI4yRVLzjyEW7Ucjk15csElR56iSaFD9TBQ
+  #
   
   def write_to_temp_file(filename, content)
     temp_dir = Rails.root.join('tmp')

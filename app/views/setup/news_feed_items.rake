@@ -11,4 +11,7 @@ namespace :news_feed_items do
       end
     end
   end
+  
+  # be rake news_feed_items:set_authors_and_news_source_names --trace
+
 end

@@ -1,11 +1,34 @@
 class Event < ApplicationRecord
+  #
+  # RELATIONSHIPS
+  #  
   belongs_to :event_type, optional: true
   belongs_to :state
   belongs_to :city, optional: true
   belongs_to :county, optional: true
   belongs_to :organization, optional: true
   belongs_to :congressional_district, optional: true
+  has_many_attached :files # this can be :images, :attachments, etc.
   
+  #
+  # VALIDATIONS
+  #
+  validates :slug, presence: true, uniqueness: true
+  
+  #
+  # SERIALIZERS
+  #
+  serialize :source_data, type: Hash, coder: YAML
+  
+  #
+  # SCOPES
+  #
+  scope :ordered_by_date, -> { order(date_start_at: :desc) }
+
+  
+  #
+  # FIELD MAPPING
+  #  
   NAME_FIELD = :name
   ADDRESS1_FIELD = :address1
   ADDRESS2_FIELD = :address2
@@ -14,19 +37,16 @@ class Event < ApplicationRecord
   TIME_FIELD = :time_start_at
   URL_FIELD = :url
   ZIP_FIELD = :zip
-  
 
-  
-  
-  has_many_attached :files # this can be :images, :attachments, etc.
-  
-  serialize :source_data, type: Hash, coder: YAML
-  
+
+
+  #
+  # FIND OR CREATE
+  #
   IDENTITY_RELATIONSHIP = :all # could also be :all
   IDENTITY_COLUMNS = [:name, :date_start_at, :city_id]
   include FindOrCreate
-  
-  scope :ordered_by_date, -> { order(date_start_at: :desc) }
+
   
   if Rails.env.development? 
     include MeiliSearch::Rails
@@ -39,10 +59,23 @@ class Event < ApplicationRecord
     end
   end
   
+  #
+  # INSTANCE METHODS
+  #
+  
   # def event_start_at
   #   return self.send(:date_start_at) if self.date_start_at
   #   return Date.today
   # end
   
+  def to_param
+    #slug
+    #"#{slug} :: #{name}"
+    "#{slug}-#{name.parameterize}"
+  end
+  
+  #
+  # CLASS METHODS
+  #
   
 end
