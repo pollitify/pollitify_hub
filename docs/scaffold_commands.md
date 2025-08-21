@@ -1,5 +1,12 @@
 # Scaffold Commands
 
+rails g scaffold NewsClusterAssignment user:references news_feed_item:references news_cluster_term:references
+
+rails g scaffold NewsClusterTerm user:references news_cluster:references term
+
+rails g scaffold NewsCluster name:string user:references active:boolean
+
+
 rails g scaffold GoogleSheetUrl name:string url:string options:text last_checked_at:datetime ip_address:string user_agent:string user:references
 
 bin/rails generate scaffold NewsFeedItem \
