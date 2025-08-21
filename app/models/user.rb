@@ -3,15 +3,33 @@ class User < ApplicationRecord
   # :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable, :trackable
+         :lockable, :timeoutable, :trackable
+         #:confirmable, 
 
-  # validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   # validates :password, presence: true
   # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :username, presence: true, uniqueness: true
+  #validates :username, presence: true, uniqueness: true
+  # validates :username, presence: true,
+  #                      uniqueness: { case_sensitive: false },
+  #                      length: { minimum: 3, maximum: 20 }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, presence: true
   validates :password, length: { maximum: 20 }
   validate :valid_date?
+  
+  attr_accessor :login
+  
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions).where(
+        ["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]
+      ).first
+    else
+      where(conditions).first
+    end
+  end
 
   # enum :role, { user: "user", admin: "admin" }
   # validates :role, inclusion: { in: roles.keys }
@@ -80,6 +98,10 @@ class User < ApplicationRecord
   
   def has_destroy_rights?(foo)
     return true if self.email =~ /fuzzygroup/
+  end
+  
+  def to_param
+    username.parameterize
   end
   
 

@@ -4,58 +4,94 @@
       alt: 'Register for a new account',
       class: 'img-fluid') %>
   </div>
+  
+  <% if Rails.env.development? %>
+    <% if resource.errors.any? %>
+      <div>
+        <% resource.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 
   <div class="order-1 col-lg-6 col-md-12 d-flex flex-row align-items-center">
     <div class="card-body p-md-5">
       <h3 class="mb-5 text-uppercase fs-4">Sign up</h3>
       
-      <%= form_tag(registration_path(resource_name), method: :post) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="row">
           <div class="col-md-6">
             <div class="form-floating mb-3">
-              <%= text_field_tag "#{resource_name}[first_name]", resource.first_name,
+              <%= f.text_field :first_name,
                 class: "form-control#{' is-invalid' if resource.errors[:first_name].any?}",
                 placeholder: 'First name' %>
-              <%= label_tag "#{resource_name}[first_name]", 'First name' %>
+              <%= f.label :first_name, 'First name' %>
               <% if resource.errors[:first_name].any? %>
-                <div class="text-danger">
-                  <%= resource.errors[:first_name].join(", ") %>
-                </div>
+                <div class="text-danger"><%= resource.errors[:first_name].join(", ") %></div>
               <% end %>
             </div>
           </div>
+          
           <div class="col-md-6">
             <div class="form-floating mb-3">
-              <%= text_field_tag "#{resource_name}[last_name]", resource.last_name,
-                class: "form-control",
-                placeholder: 'Last name' %>
-              <%= label_tag "#{resource_name}[last_name]", 'Last name' %>
+              <%= f.text_field :last_name,
+                class: "form-control#{' is-invalid' if resource.errors[:last_name].any?}",
+                placeholder: 'Last name',
+                autocomplete: "family-name",
+                autocapitalize: "none",
+                spellcheck: false %>
+              <%= f.label :last_name, 'Last name' %>
+              <% if resource.errors[:last_name].any? %>
+                <div class="text-danger"><%= resource.errors[:last_name].join(", ") %></div>
+              <% end %>
             </div>
           </div>
         </div>
 
         <div class="form-floating mb-3">
-          <%= email_field_tag "#{resource_name}[email]", resource.email,
+          <%= f.email_field :email,
             class: "form-control#{' is-invalid' if resource.errors[:email].any?}",
-            placeholder: 'Email address' %>
-          <%= label_tag "#{resource_name}[email]", 'Email address' %>
+            placeholder: 'Email address',
+            autocomplete: "email" %>
+          <%= f.label :email, 'Email address' %>
           <% if resource.errors[:email].any? %>
-            <div class="text-danger">
-              <%= resource.errors[:email].join(", ") %>
-            </div>
+            <div class="text-danger"><%= resource.errors[:email].join(", ") %></div>
           <% end %>
         </div>
 
-        <p class='text-muted mb-1'>Minimum <%=@minimum_password_length %> characters</p>
         <div class="form-floating mb-3">
-          <%= password_field_tag "#{resource_name}[password]", nil,
+          <%= f.text_field :username,
+            class: "form-control#{' is-invalid' if resource.errors[:username].any?}",
+            placeholder: 'Username',
+            autocomplete: "username" %>
+          <%= f.label :username, 'Username' %>
+          <% if resource.errors[:username].any? %>
+            <div class="text-danger"><%= resource.errors[:username].join(", ") %></div>
+          <% end %>
+        </div>
+
+        <p class="text-muted mb-1">Minimum <%= @minimum_password_length %> characters</p>
+        <div class="form-floating mb-3">
+          <%= f.password_field :password,
             class: "form-control#{' is-invalid' if resource.errors[:password].any?}",
-            placeholder: 'Password' %>
-          <%= label_tag :password, 'Password' %>
+            placeholder: 'Password',
+            autocomplete: "new-password" %>
+          <%= f.label :password, 'Password' %>
           <% if resource.errors[:password].any? %>
-            <div class="text-danger">
-              <%= resource.errors[:password].join(", ") %>
-            </div>
+            <div class="text-danger"><%= resource.errors[:password].join(", ") %></div>
+          <% end %>
+        </div>
+
+        <p class="text-muted mb-1">Confirm password</p>
+        <div class="form-floating mb-3">
+          <%= f.password_field :password_confirmation,
+            class: "form-control#{' is-invalid' if resource.errors[:password_confirmation].any?}",
+            placeholder: 'Password Confirmation',
+            autocomplete: "new-password" %>
+          <%= f.label :password_confirmation, 'Password Confirmation' %>
+          <% if resource.errors[:password_confirmation].any? %>
+            <div class="text-danger"><%= resource.errors[:password_confirmation].join(", ") %></div>
           <% end %>
         </div>
 
@@ -63,14 +99,11 @@
           <%= button_tag type: 'reset', class: 'btn btn-light btn-lg' do %>
             Reset all
           <% end %>
-          <%= button_tag type: 'submit', class: 'btn btn-warning btn-lg ms-2' do %>
-            Sign up
-          <% end %>
+          <%= f.submit 'Sign up', class: 'btn btn-warning btn-lg ms-2' %>
         </div>
       <% end %>
 
       <%= render "devise/shared/links" %>
-
     </div>
   </div>
 <% end %>

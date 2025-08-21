@@ -70,6 +70,18 @@
             </div>
           <% end %>
         </div>
+        
+        <div class="form-floating mb-3">
+          <%= text_field_tag "#{resource_name}[username]", resource.username,
+            class: "form-control#{' is-invalid' if resource.errors[:username].any?}",
+            placeholder: 'Username' %>
+          <%= label_tag "#{resource_name}[username]", 'Username' %>
+          <% if resource.errors[:username].any? %>
+            <div class="text-danger">
+              <%= resource.errors[:username].join(", ") %>
+            </div>
+          <% end %>
+        </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div class="text-muted">

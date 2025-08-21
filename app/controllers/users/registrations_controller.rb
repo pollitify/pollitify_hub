@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :must_sign_in, only: %i[show]
   before_action :configure_sign_up_params, only: [ :create ]
   before_action :configure_account_update_params, only: [ :update ]
-  before_action :set_username, only: [ :create ]
+  #before_action :set_username, only: [ :create ]
 
   # GET /resource/sign_up
   # def new
