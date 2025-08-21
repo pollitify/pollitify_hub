@@ -14,7 +14,10 @@ TAG_LINES = [
   "People Power Pollitify", 
   "Power Tools for Progressives",
   "Tools for Progressive People", 
-  "Pollitify :: Share, Create, Activate", 
-  "Pollitify :: something about being a social network"
+  "Tools for Organizers and Other Progressives", 
+  "Pollitify :: Find Events, Organize, Change",
+  "Pollitify :: Share, Create, Activate"
+  # ,
+  # "Pollitify :: something about being a social network"
 ]
 USER_LIMIT = 25
