@@ -1,8 +1,8 @@
 # Gemfile
 # gem 'stemmify'
 
-require 'stemmify'
-require 'nmatrix'
+#require 'stemmify'
+#require 'nmatrix'
 
 # Article class
 class Article
