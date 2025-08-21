@@ -15,6 +15,18 @@ class HomeController < ApplicationController
     
     state, city, county = SearchQuery.get_objects("fishers", "IN")  
     @events = Event.where(state_id: state.id, county_id: county.id).ordered_by_date
+    
+    #
+    # BCG TODO this HAS to be fixed -- recurring events need to be instantiated to an actual date_start_at
+    #
+    if Rails.env.development?
+      @events.each do |event|
+        if event.event_start_at.blank? 
+          event.event_start_at = Date.today
+        end
+      end
+    end
+    
       #raise @events.inspect
       #@events = []
     @date = Date.today

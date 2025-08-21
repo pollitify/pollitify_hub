@@ -24,6 +24,10 @@
       </h2>
       <%=news_feed_item.summary.html_safe%>
       <p class="text-end"><strong><%=news_feed_item.published_at%></strong></p>
+      <% if news_feed_item.news_source_name.present? %>
+      <p class="text-end"><strong><%=news_feed_item.news_source_name%></strong></p>
+      <% end %>
+      <!-- <p class="text-end"><strong><%=news_feed_item.published_at%></strong></p> -->
     </td>    
 <% end %>
 
