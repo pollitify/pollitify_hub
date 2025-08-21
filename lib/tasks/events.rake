@@ -45,7 +45,7 @@ namespace :events do
     #
     # File.write(file_path, utf8_data)
     
-    file_path = Rails.root.join('lib', 'tasks', 'data', 'sheet_cleaned.csv')
+    file_path = Rails.root.join('lib', 'tasks', 'data', 'indiana_resistance_alliance_08_09_25_cleaned.csv')
     #agent = Mechanize.new
     
     Event.destroy_all
