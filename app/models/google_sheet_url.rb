@@ -1,7 +1,7 @@
 class GoogleSheetUrl < ApplicationRecord
   belongs_to :user
   
-  require 'CSV'
+  require 'csv'
   
   IDENTITY_RELATIONSHIP = :all # could also be :all
   IDENTITY_COLUMNS = [:name]
