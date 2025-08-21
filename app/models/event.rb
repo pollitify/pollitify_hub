@@ -6,6 +6,18 @@ class Event < ApplicationRecord
   belongs_to :organization, optional: true
   belongs_to :congressional_district, optional: true
   
+  NAME_FIELD = :name
+  ADDRESS1_FIELD = :address1
+  ADDRESS2_FIELD = :address2
+  CITY_NAME_FIELD = :city_name
+  DATE_FIELD = :date_start_at
+  TIME_FIELD = :time_start_at
+  URL_FIELD = :url
+  ZIP_FIELD = :zip
+  
+
+  
+  
   has_many_attached :files # this can be :images, :attachments, etc.
   
   serialize :source_data, type: Hash, coder: YAML
@@ -27,10 +39,10 @@ class Event < ApplicationRecord
     end
   end
   
-  def event_start_at
-    return self.send(:date_start_at) if self.date_start_at
-    return Date.today
-  end
+  # def event_start_at
+  #   return self.send(:date_start_at) if self.date_start_at
+  #   return Date.today
+  # end
   
   
 end
