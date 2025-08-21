@@ -56,6 +56,11 @@ class NewsFeedUrl < ApplicationRecord
       nfi_struct.image_url         = RssFeedFetcher.extract_image_url(cleaned_text)
       nfi_struct.permalink         = RssFeedFetcher.extract_permalink(cleaned_text)
       nfi_struct.news_feed_url_id  = NewsFeedUrl.first.id
+      
+      ns_name, a_name = NewsFeedItem.extract_news_source_name_and_author(entry.title)
+      
+      nfi_struct.news_source_name  = ns_name
+      nfi_struct.author            = a_name
       #debugger
       status, nfi_struct = NewsFeedItem.find_or_create(nfi_struct)
       

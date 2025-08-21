@@ -1,5 +1,12 @@
 namespace :news_feed_urls do 
   
+  task :set_names => :environment do
+    nfis = NewsFeedItem.all
+    nfis.each do |nfi|
+      nfi.extract_and_save_news_source_name_and_author
+    end
+  end
+  
   # be rake news_feed_urls:init --trace
   task :init => :environment do
     Rake::Task["news_feed_urls:seed"].invoke

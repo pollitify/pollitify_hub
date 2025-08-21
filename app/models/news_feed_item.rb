@@ -32,6 +32,34 @@ class NewsFeedItem < ApplicationRecord
   #   Vote.where(votable: self).sum(:value)
   # end
   
+  def self.extract_news_source_name_and_author(title)
+    if m = title.match(/\(([^)]+)\/([^)]+)\)/)
+      a_name = m[1]
+      ns_name = m[2]   # "My Data"
+    elsif m = title.match(/\(([^)]+)\)/)
+      a_name = nil
+      ns_name = m[1]   # "My Data"
+    end
+    return ns_name, a_name
+  end
+  
+  def extract_and_save_news_source_name_and_author
+    #summary.scan(/[A-Za-z ]+[A-Za-z ]+ \/ <A HREF=\\"[a-z:\/.]+\\"\>([^<]+)</)
+    # if m = title.match(/\(([^)]+)\)/)
+    if m = title.match(/\(([^)]+)\/([^)]+)\)/)
+      a_name = m[1]
+      ns_name = m[2]   # "My Data"
+      self.update_column(:author, a_name)
+      self.update_column(:news_source_name, ns_name)
+    elsif m = title.match(/\(([^)]+)\)/)
+      a_name = nil
+      ns_name = m[1]   # "My Data"
+      self.update_column(:news_source_name, ns_name)
+    end
+    #return news_source_name, author_name
+    #params = {}
+  end
+  
   def score
     self.get_upvotes.size - self.get_downvotes.size
   end
