@@ -1,0 +1,13 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if current_user && current_user.is_admin? %>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      <% end %>      
+      <th scope="col">Name</th>
+      <th scope="col">Url</th>
+    </tr>
+  </thead>
+  <tbody>

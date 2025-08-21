@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_21_112432) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_21_203755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -267,6 +267,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_112432) do
     t.index ["domain_id"], name: "index_organizations_on_domain_id"
     t.index ["secure_chat_system_id"], name: "index_organizations_on_secure_chat_system_id"
     t.index ["state_id"], name: "index_organizations_on_state_id"
+  end
+
+  create_table "political_parties", force: :cascade do |t|
+    t.string "name"
+    t.string "fid"
+    t.string "url"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|

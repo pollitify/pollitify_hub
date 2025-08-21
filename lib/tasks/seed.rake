@@ -20,6 +20,8 @@ namespace :seed do
     ###Rake::Task["users:init"].invoke
     Rake::Task["google_sheet_urls:init"].invoke
     Rake::Task["news_feed_urls:init"].invoke
+    Rake::Task["political_parties:init"].invoke
+    Rake::Task["congressional_districts:init"].invoke
     
     #Rake::Task["users:seed"].invoke
     

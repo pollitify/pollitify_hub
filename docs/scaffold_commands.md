@@ -1,5 +1,22 @@
 # Scaffold Commands
 
+bin/rails generate scaffold CongressionalDistrict \
+  name:string \
+  state_name:string\
+  key_city:string \
+  key_county:string \
+  state:references \
+  user:references
+
+rails g scaffold PoliticalParty name:string fid:string url:string 
+  create_table "political_parties", force: :cascade do |t|
+    t.string "name"
+    t.string "fid"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 rails g scaffold NewsClusterAssignment user:references news_feed_item:references news_cluster_term:references
 
 rails g scaffold NewsClusterTerm user:references news_cluster:references term

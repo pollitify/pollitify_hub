@@ -1,0 +1,17 @@
+    <tr>
+      
+      <% if current_user && current_user.is_admin? %>      
+        <td scope="row">
+          <%= political_party.id%>
+        </th>
+        <td scope="row">
+          <%= link_to('✏️', edit_political_party_path(political_party), class: "no-underline")%> 
+        </td>
+        <td scope="row">
+          <%= button_to "🗑️", political_party, method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: "unstyled-button" if current_user && current_user.has_destroy_rights?(political_party)%>
+        </td>
+      <% end %>
+        
+      <td><%= link_to(political_party.name.html_safe, political_party_path(political_party)) %></td>      
+      <td><%= link_to(political_party.url, political_party.url) if political_party.url%></td>
+    </tr>
