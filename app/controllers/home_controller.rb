@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     #
     # BCG TODO this HAS to be fixed -- recurring events need to be instantiated to an actual date_start_at
     #
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.production?
       @events.each do |event|
         if event.event_start_at.blank? 
           event.event_start_at = Date.today
