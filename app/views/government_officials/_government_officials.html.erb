@@ -17,9 +17,10 @@
       <td class="text-center">
         <%= government_official.try(:political_party).try(:name)%>
       </td>
-      <!-- <td class="text-center">
+      <td class="text-center">
+        <%= "N.A." if government_official.senator? %>
         <%= government_official.try(:congressional_district).try(:name)%>
-      </td> -->
-      <td class="text-center"><%= link_to('Call', "tel: #{government_official.phone_number}")%></td>
+      </td>
+      <td class="text-center"><%= link_and_phone_call_gofficial(government_official).html_safe%></td>
       <td class="text-center"><%=link_to('📧', government_official.email_link)%></td>
     </tr>

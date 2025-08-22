@@ -64,12 +64,16 @@
     
     <p>
       <strong>Website:</strong>
-      <%= political_link(government_official, :website)%>
+      <%= political_link(government_official, :website )%>
     </p>
     
     <p>
       <strong>Watch on YouTube:</strong>
       <%= political_link(government_official, :youtube)%>
+      
+     <%= link_to "#", class: "btn btn-youtube-play" do %>
+        <span class="play-icon"></span>
+      <% end %>
     </p>
     
   </fieldset>

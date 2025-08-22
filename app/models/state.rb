@@ -3,6 +3,8 @@ class State < ApplicationRecord
   IDENTITY_COLUMNS = [:name, :fid]
   include FindOrCreate
   
+  has_many :congressional_districts
+  has_many :counties
   has_many :cities
   has_many :events
   

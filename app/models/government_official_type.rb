@@ -15,4 +15,17 @@ class GovernmentOfficialType < ApplicationRecord
   def self.congress_person
     self.where(fid: 'congress_person').first
   end
+
+  def self.state_senator
+    self.where(fid: 'state_senator').first
+  end
+  
+  def self.state_representative
+    self.where(fid: 'state_representative').first
+  end
+  
+  def self.state_rep
+    self.where(fid: 'state_representative').first
+  end
+
 end

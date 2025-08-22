@@ -172,7 +172,11 @@ module ContactCardsHelper
     if contact_card.nil? || contact_card.phone_mobile.blank?
       return "No Mobile Phone Number for this Person" 
     end
-    return "<span class='fs-3'>☎️</span> " + link_to(" #{format_phone_number(contact_card.phone_mobile)}", "tel: #{contact_card.phone_mobile}", class: 'no-underline')
+    return "<span class='fs-3'>☎️</span> " + link_to(" #{format_phone_number(contact_card.phone_mobile)}", "tel: #{contact_card.phone_mobile}", class: 'no-underline', style: "color: #002244 ")
+  end
+  
+  def link_and_phone_call_gofficial(government_official)
+    return "<span class='fs-3'>☎️</span> " + link_to(" #{format_phone_number(government_official.phone_number)}", "tel: #{government_official.phone_number}", class: 'no-underline')
   end
   
   def link_and_text_message(contact_card)

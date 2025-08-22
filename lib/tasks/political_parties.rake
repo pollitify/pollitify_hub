@@ -59,6 +59,9 @@ namespace :political_parties do
       fid: "other"
     )
     
+    political_parties << 
+    OpenStruct.new( name: 'Nonpartisan', fid: 'nonpartisan')
+    
     
 
     

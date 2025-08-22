@@ -1,4 +1,12 @@
 class User < ApplicationRecord
+  belongs_to :state
+  belongs_to :county
+  belongs_to :city
+  
+  def state?
+    return true if self.state
+  end
+  
   # Include default devise modules. Others available are:
   # :omniauthable
   devise :database_authenticatable, :registerable,

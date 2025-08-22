@@ -32,6 +32,18 @@ namespace :government_official_types do
       fid: "staff"
     )
     
+    government_official_type_structs << 
+    OpenStruct.new(
+      name: "State Senator",
+      fid: "state_senator"
+    )
+
+    government_official_type_structs << 
+    OpenStruct.new(
+      name: "State Representative",
+      fid: "state_representative"
+    )
+    
     add_government_official_types(government_official_type_structs)
   end
   

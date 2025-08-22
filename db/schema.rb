@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_22_011503) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -278,6 +278,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_011503) do
     t.string "wikipedia_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "data_source"
+    t.string "fid"
+    t.string "current_chamber"
+    t.string "email"
+    t.text "biography"
+    t.date "death_date"
+    t.string "image"
+    t.jsonb "links", default: []
+    t.jsonb "sources", default: []
+    t.string "capitol_voice"
+    t.string "capitol_fax"
+    t.string "district_address"
+    t.string "district_voice"
+    t.string "district_fax"
+    t.string "instagram"
+    t.string "wikidata"
+    t.string "home_address1"
+    t.string "home_address2"
+    t.string "home_city"
+    t.string "home_state"
+    t.string "home_zip"
+    t.string "home_phone"
     t.index ["congressional_district_id"], name: "index_government_officials_on_congressional_district_id"
     t.index ["government_official_type_id"], name: "index_government_officials_on_government_official_type_id"
     t.index ["political_party_id"], name: "index_government_officials_on_political_party_id"
@@ -532,11 +554,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_011503) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "state_id"
+    t.bigint "county_id"
+    t.bigint "city_id"
+    t.bigint "congressional_district_id"
+    t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["congressional_district_id"], name: "index_users_on_congressional_district_id"
+    t.index ["county_id"], name: "index_users_on_county_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["first_name"], name: "index_users_on_first_name"
     t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["state_id"], name: "index_users_on_state_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -589,4 +619,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_011503) do
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "users", "cities"
+  add_foreign_key "users", "congressional_districts"
+  add_foreign_key "users", "counties"
+  add_foreign_key "users", "states"
 end

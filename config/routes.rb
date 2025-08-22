@@ -9,7 +9,14 @@ Rails.application.routes.draw do
   #
   require "sidekiq/web"
   Rails.application.routes.draw do
-  resources :government_officials
+    
+  get "government_officials/me", to: "government_officials#me"
+    
+  resources :government_officials do
+    collection do
+      get 'me'
+    end
+  end
   resources :government_official_types
   resources :political_parties
   resources :google_sheet_urls

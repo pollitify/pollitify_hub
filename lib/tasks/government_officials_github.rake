@@ -11,6 +11,15 @@ namespace :government_officials_github do
     Rake::Task["government_officials_github:metrics"].invoke
   end
   
+  # be rake government_officials_github:set_data_source --trace
+  task :set_data_source => :environment do
+    gos = GovernmentOfficial.all
+    gos.each do |go|
+      go.data_source = "github_master_data.csv"
+      go.save
+    end
+  end
+  
   # be rake government_officials_github:rename_existing_with_a_z --trace
   task :rename_existing_with_a_z => :environment do
     government_officials = GovernmentOfficial.all
