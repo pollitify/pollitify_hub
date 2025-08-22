@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "My Government officials" %>
+
+<h1>My Government officials</h1> 
+<div id="government_officials">
+  <%= render 'government_officials_header' %>
+
+  <% @my_government_officials.each do |government_official| %>
+    <%= render 'government_officials', {government_official: government_official} %>
+  <% end %>
+  <%= render 'government_officials_footer' %>
+</div>

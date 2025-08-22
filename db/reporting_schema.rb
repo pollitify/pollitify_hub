@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_21_203755) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_011503) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -214,6 +214,74 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_203755) do
     t.string "gid"
     t.integer "start_at_row"
     t.index ["user_id"], name: "index_google_sheet_urls_on_user_id"
+  end
+
+  create_table "government_official_types", force: :cascade do |t|
+    t.string "name"
+    t.string "fid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "government_officials", force: :cascade do |t|
+    t.string "full_name"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "title"
+    t.string "phone_number"
+    t.string "email_link"
+    t.string "full_address"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "state_name"
+    t.string "zip"
+    t.bigint "state_id"
+    t.bigint "government_official_type_id"
+    t.text "committees"
+    t.boolean "veteran", default: false
+    t.bigint "political_party_id"
+    t.bigint "congressional_district_id"
+    t.string "suffix"
+    t.string "nickname"
+    t.date "birthday"
+    t.string "gender"
+    t.string "job_type"
+    t.string "district"
+    t.string "senate_class"
+    t.string "party"
+    t.string "url"
+    t.string "address"
+    t.string "phone"
+    t.string "contact_form"
+    t.string "rss_url"
+    t.string "twitter"
+    t.string "twitter_id"
+    t.string "facebook"
+    t.string "youtube"
+    t.string "youtube_id"
+    t.string "mastodon"
+    t.string "bluesky"
+    t.string "bluesky_id"
+    t.string "bioguide_id"
+    t.string "thomas_id"
+    t.string "opensecrets_id"
+    t.string "lis_id"
+    t.string "fec_ids"
+    t.string "cspan_id"
+    t.string "govtrack_id"
+    t.string "votesmart_id"
+    t.string "ballotpedia_id"
+    t.string "washington_post_id"
+    t.string "icpsr_id"
+    t.string "wikipedia_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["congressional_district_id"], name: "index_government_officials_on_congressional_district_id"
+    t.index ["government_official_type_id"], name: "index_government_officials_on_government_official_type_id"
+    t.index ["political_party_id"], name: "index_government_officials_on_political_party_id"
+    t.index ["state_id"], name: "index_government_officials_on_state_id"
   end
 
   create_table "news_feed_items", force: :cascade do |t|
@@ -506,6 +574,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_203755) do
   add_foreign_key "events", "organizations"
   add_foreign_key "events", "states"
   add_foreign_key "google_sheet_urls", "users"
+  add_foreign_key "government_officials", "congressional_districts"
+  add_foreign_key "government_officials", "government_official_types"
+  add_foreign_key "government_officials", "political_parties"
+  add_foreign_key "government_officials", "states"
   add_foreign_key "news_feed_items", "news_feed_urls"
   add_foreign_key "organizations", "domains"
   add_foreign_key "organizations", "secure_chat_systems"

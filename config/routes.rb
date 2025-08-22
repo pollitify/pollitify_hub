@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :government_officials
+  resources :government_official_types
   resources :political_parties
   resources :google_sheet_urls
   
@@ -7,6 +9,8 @@ Rails.application.routes.draw do
   #
   require "sidekiq/web"
   Rails.application.routes.draw do
+  resources :government_officials
+  resources :government_official_types
   resources :political_parties
   resources :google_sheet_urls
     mount Sidekiq::Web => "/sidekiq"

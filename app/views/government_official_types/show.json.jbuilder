@@ -1,0 +1,1 @@
+json.partial! "government_official_types/government_official_type", government_official_type: @government_official_type

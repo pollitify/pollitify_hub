@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @government_official, {government_official: @government_official, political_parties: @political_party} %>
+
+<div>
+  <%= link_to "Edit this government official", edit_government_official_path(@government_official) %> |
+  <%= link_to "Back to government officials", government_officials_path %>
+
+  <%= button_to "Destroy this government official", @government_official, method: :delete %>
+</div>

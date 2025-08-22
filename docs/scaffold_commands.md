@@ -1,5 +1,62 @@
 # Scaffold Commands
 
+bin/rails generate scaffold GovernmentOfficial \
+  full_name:string \
+  first_name:string \
+  middle_name:string \
+  last_name:string \
+  title:string \
+  phone_number:string \
+  email_link:string \
+  full_address:string \
+  address1:string \
+  address2:string \
+  city:string \
+  state_name:string \
+  zip:string \
+  state:references \
+  government_official_type:references \
+  committees:text \
+  veteran:boolean \
+  political_party:references \
+  congressional_district:references \
+  suffix:string \
+  nickname:string \
+  birthday:date \
+  gender:string \
+  job_type:string \
+  district:string \
+  senate_class:string \
+  party:string \
+  url:string \
+  address:string \
+  phone:string \
+  contact_form:string \
+  rss_url:string \
+  twitter:string \
+  twitter_id:string \
+  facebook:string \
+  youtube:string \
+  youtube_id:string \
+  mastodon:string \
+  bluesky:string \
+  bluesky_id:string \
+  bioguide_id:string \
+  thomas_id:string \
+  opensecrets_id:string \
+  lis_id:string \
+  fec_ids:string \
+  cspan_id:string \
+  govtrack_id:string \
+  votesmart_id:string \
+  ballotpedia_id:string \
+  washington_post_id:string \
+  icpsr_id:string \
+  wikipedia_id:string 
+
+
+rails g scaffold GovernmentOfficialType name:string fid:string 
+
 bin/rails generate scaffold CongressionalDistrict \
   name:string \
   state_name:string\

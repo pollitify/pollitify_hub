@@ -41,3 +41,29 @@ input[type="submit"] {
   @extend .btn;
   @extend .btn-primary;
 }
+
+.no-underline {
+  text-decoration: none;
+}
+
+.unstyled-button {
+  all: unset;
+  cursor: pointer; /* Optional: preserve pointer behavior */
+}
+
+fieldset a, 
+fieldset p a,
+fieldset div a {
+  color: #002244 !important;
+  text-decoration: underline;
+}
+
+
+fieldset a:visited {
+  color: #5a2a8f;        /* dark purple for visited */
+}
+
+fieldset a:hover,
+fieldset a:focus {
+  color: #d23669;        /* accent hover/focus color */
+}

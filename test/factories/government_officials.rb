@@ -1,0 +1,56 @@
+FactoryBot.define do
+  factory :government_official do
+    full_name { "MyString" }
+    first_name { "MyString" }
+    middle_name { "MyString" }
+    last_name { "MyString" }
+    title { "MyString" }
+    phone_number { "MyString" }
+    email_link { "MyString" }
+    full_address { "MyString" }
+    address1 { "MyString" }
+    address2 { "MyString" }
+    city { "MyString" }
+    state_name { "MyString" }
+    zip { "MyString" }
+    state { nil }
+    government_official_type { nil }
+    committees { "MyText" }
+    veteran { false }
+    political_party { nil }
+    congressional_district { nil }
+    suffix { "MyString" }
+    nickname { "MyString" }
+    birthday { "2025-08-21" }
+    gender { "MyString" }
+    job_type { "MyString" }
+    district { "MyString" }
+    senate_class { "MyString" }
+    party { "MyString" }
+    url { "MyString" }
+    address { "MyString" }
+    phone { "MyString" }
+    contact_form { "MyString" }
+    rss_url { "MyString" }
+    twitter { "MyString" }
+    twitter_id { "MyString" }
+    facebook { "MyString" }
+    youtube { "MyString" }
+    youtube_id { "MyString" }
+    mastodon { "MyString" }
+    bluesky { "MyString" }
+    bluesky_id { "MyString" }
+    bioguide_id { "MyString" }
+    thomas_id { "MyString" }
+    opensecrets_id { "MyString" }
+    lis_id { "MyString" }
+    fec_ids { "MyString" }
+    cspan_id { "MyString" }
+    govtrack_id { "MyString" }
+    votesmart_id { "MyString" }
+    ballotpedia_id { "MyString" }
+    washington_post_id { "MyString" }
+    icpsr_id { "MyString" }
+    wikipedia_id { "MyString" }
+  end
+end

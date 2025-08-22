@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Government officials" %>
+
+<h1>Your Federal Government Officials</h1> 
+<p><%= link_to("My Officials", '')%> || <%= link_to('My Representatives', '')%>|| <%=link_to("My Senators",'')%>|| <%= link_to("All Officials", '')%></p>
+
+<div id="government_officials">
+  <!-- <%# @government_officials.each do |government_official| %>
+    <%#= render government_official %>
+    <p>
+      <%#= link_to "Show this government official", government_official %>
+    </p>
+  <%# end %> -->
+  <%= render 'government_officials_header' %>
+
+  <% @government_officials.each do |government_official| %>
+    <%= render 'government_officials', {government_official: government_official} %>
+  <% end %>
+  <%= render 'government_officials_footer' %>
+</div>
+
+<%=primary_action_button("New government official", new_government_official_path) if current_user && current_user.is_superuser?%>

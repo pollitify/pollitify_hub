@@ -22,6 +22,8 @@ namespace :seed do
     Rake::Task["news_feed_urls:init"].invoke
     Rake::Task["political_parties:init"].invoke
     Rake::Task["congressional_districts:init"].invoke
+    Rake::Task["government_official_types:init"].invoke
+    Rake::Task["government_officials_github:init"].invoke
     
     #Rake::Task["users:seed"].invoke
     

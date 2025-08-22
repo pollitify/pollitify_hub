@@ -1,0 +1,143 @@
+<div id="<%= dom_id government_official %>">
+  <!--
+    <fieldset>
+      <legend>
+        <h2></h2>
+      </legend>
+    </fieldset>
+    
+  -->
+    
+  <h1 class="text-center">
+    <span><%=government_official.title%> <%=government_official.full_name%></span>
+  </h1>
+  
+  <fieldset class="light-bg">
+    <legend>
+      <h2>About the <%=government_official.title%></h2>
+    </legend>
+    
+    <p>
+      <strong>Full name:</strong>
+      <%= government_official.full_name %>
+    </p>
+
+    <p>
+      <strong>First name:</strong>
+      <%= government_official.first_name %>
+    </p>
+
+    <p>
+      <strong>Middle name:</strong>
+      <%= government_official.middle_name %>
+    </p>
+
+    <p>
+      <strong>Last name:</strong>
+      <%= government_official.last_name %>
+    </p>
+
+    <p>
+      <strong>Title:</strong>
+      <%= government_official.title %>
+    </p>
+  </fieldset>
+  
+
+  <fieldset class="light-bg">
+    <legend>
+      <h2>Contact the <%=government_official.title%></h2>
+    </legend>
+    
+    <p>
+      <strong>Phone number:</strong>
+      <%= link_and_phone_call_number(government_official) %>
+    </p>
+    
+    
+  </fieldset>
+  
+  <fieldset class="light-bg">
+    <legend>
+      <h2>Interact Online with the <%=government_official.title%></h2>
+    </legend>
+    
+    <p>
+      <strong>Website:</strong>
+      <%= political_link(government_official, :website)%>
+    </p>
+    
+    <p>
+      <strong>Watch on YouTube:</strong>
+      <%= political_link(government_official, :youtube)%>
+    </p>
+    
+  </fieldset>
+  
+    
+
+
+
+
+
+  <p>
+    <strong>Email link:</strong>
+    <%= link_to(government_official.email_link,  government_official.email_link)%>
+  </p>
+
+  <p>
+    <strong>Full address:</strong>
+    <%= government_official.full_address %>
+  </p>
+
+  <p>
+    <strong>Address1:</strong>
+    <%= government_official.address1 %>
+  </p>
+
+  <p>
+    <strong>Address2:</strong>
+    <%= government_official.address2 %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= government_official.city %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= government_official.state.name %>
+  </p>
+
+  <p>
+    <strong>Zip:</strong>
+    <%= government_official.zip %>
+  </p>
+
+  <p>
+    <strong>Government official type:</strong>
+    <%= government_official.government_official_type.name %>
+  </p>
+
+  <p>
+    <strong>Political Party:</strong>
+    <%= government_official.try(:political_party).try(:name) %>
+  </p>
+
+  <p>
+    <strong>Congressional District:</strong>
+    <%= government_official.try(:congressional_district).try(:name) %>
+  </p>
+
+
+  <!-- <p>
+    <strong>Committees:</strong>
+    <ul>
+    <%#government_official.committees.each do |c|  %>
+      <li><%#= link_to(c.name, c)%>
+    <%# end %>
+    </ul>
+  </p> -->
+
+</div>

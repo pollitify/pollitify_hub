@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if current_user && current_user.is_admin? %>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      <% end %>      
+      <th scope="col">State</th>
+      <th scope="col">Title</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Political Party</th>
+      <!-- <th scope="col">Congressional District</th> -->
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email Link</th>
+    </tr>
+  </thead>
+  <tbody>

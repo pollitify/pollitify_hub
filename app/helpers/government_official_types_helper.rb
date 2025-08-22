@@ -1,0 +1,2 @@
+module GovernmentOfficialTypesHelper
+end

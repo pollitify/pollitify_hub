@@ -63,3 +63,34 @@ legend {
   background-color: white;  /* Makes legend text background stand out */
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
+.unstyled-button {
+  all: unset;
+  cursor: pointer; /* Optional: preserve pointer behavior */
+}
+
+fieldset a {
+  color: #002244;        /* dark navy for contrast */
+  text-decoration: underline;
+}
+
+fieldset a:visited {
+  color: #5a2a8f;        /* dark purple for visited */
+}
+
+fieldset a:hover,
+fieldset a:focus {
+  color: #d23669;        /* accent hover/focus color */
+}
+
+.light-bg a {
+  color: #002244 !important;   /* dark navy */
+  text-decoration: underline;
+}
+
+.light-bg a:hover {
+  color: #d23669;   /* accent hover */
+}

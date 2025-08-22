@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @government_official_type %>
+
+<div>
+  <%= link_to "Edit this government official type", edit_government_official_type_path(@government_official_type) %> |
+  <%= link_to "Back to government official types", government_official_types_path %>
+
+  <%= button_to "Destroy this government official type", @government_official_type, method: :delete %>
+</div>

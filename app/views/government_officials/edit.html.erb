@@ -1,0 +1,16 @@
+<% content_for :title, "Editing government official" %>
+
+<h1>Editing government official</h1>
+
+<%= render "form", {
+  government_official: @government_official, 
+  congressional_districts: @congressional_districts,
+  political_parties: @political_parties
+  } %>
+
+<br>
+
+<div>
+  <%= link_to "Show this government official", @government_official %> |
+  <%= link_to "Back to government officials", government_officials_path %>
+</div>

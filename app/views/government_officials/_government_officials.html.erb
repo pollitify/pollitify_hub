@@ -1,0 +1,25 @@
+    <tr>
+      
+      <% if current_user && current_user.is_admin? %>      
+        <td scope="row">
+          <%= government_official.id%>
+        </th>
+        <td scope="row">
+          <%= link_to('✏️', edit_government_official_path(government_official), class: "no-underline", style: 'text-decoration: none;')%> 
+        </td>
+        <td scope="row">
+          <%= button_to "🗑️", government_official, method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: "unstyled-button", style: 'all: unset;' if current_user && current_user.has_destroy_rights?(government_official)%>
+        </td>
+      <% end %>
+      <td><span class="text-<%=government_official.color%>"><%=government_official.state.name%></span></td>
+      <td><%=government_official.title%></td>
+      <td><%=link_to(government_official.full_name, government_official)%></td>
+      <td class="text-center">
+        <%= government_official.try(:political_party).try(:name)%>
+      </td>
+      <!-- <td class="text-center">
+        <%= government_official.try(:congressional_district).try(:name)%>
+      </td> -->
+      <td class="text-center"><%= link_to('Call', "tel: #{government_official.phone_number}")%></td>
+      <td class="text-center"><%=link_to('📧', government_official.email_link)%></td>
+    </tr>
