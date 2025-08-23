@@ -26,8 +26,8 @@ namespace :seed do
     Rake::Task["congressional_district_types:init"].invoke
     Rake::Task["congressional_districts:init"].invoke
     Rake::Task["government_official_types:init"].invoke
-    Rake::Task["government_officials_github:init"].invoke
-    Rake::Task["government_officials:seed_from_open_states"].invoke
+    Rake::Task["government_officials:seed_federal_officials_from_github_data"].invoke
+    Rake::Task["government_officials:seed_state_officials_from_open_states_data"].invoke
     #Rake::Task["users:seed"].invoke
     
 

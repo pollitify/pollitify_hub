@@ -100,7 +100,7 @@ namespace :events do
       #county = County.where()
       #debugger
       event_struct.county_id = city.try(:county_id)
-      
+      event_struct.slug = Event.create_slug
       #County,City,Date,Time (Local),Event Name,Location,Group,"Type (protest, town hall, ect.)",Notes/Info,
       #debugger
       status, event = Event.find_or_create(event_struct)

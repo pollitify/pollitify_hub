@@ -25,6 +25,7 @@ class Event < ApplicationRecord
   #
   scope :ordered_by_date, -> { order(date_start_at: :desc) }
 
+  SLUG_LENGTH = 8
   
   #
   # FIELD MAPPING
@@ -38,6 +39,20 @@ class Event < ApplicationRecord
   URL_FIELD = :url
   ZIP_FIELD = :zip
 
+  def self.slug_exists?(slug)
+    return 200 if Event.where(slug: slug).first
+    return false
+  end
+  
+  # Event.create_slug
+  def self.create_slug
+    new_slug = SecureRandom.alphanumeric(SLUG_LENGTH)
+    status, sc = Event.slug_exists?(new_slug)
+    if status == 200
+      return Event.create_slug
+    end
+    new_slug
+  end
 
 
   #

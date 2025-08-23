@@ -48,6 +48,8 @@ class GoogleSheetUrl < ApplicationRecord
       # Date and Time
       event_struct.date_start_at = row["Date"]
       event_struct.time_start_at = row["Time"]
+      
+      event_struct.slug = Event.create_slug
 
       # Location
       event_struct.address1 = row["Address"]
@@ -69,14 +71,14 @@ class GoogleSheetUrl < ApplicationRecord
       else
         event_struct.recurrence = RecurrenceNormalizer.normalize(row['Reoccurring'])
         event_struct.recurring = true if event_struct.recurrence.present?
-        debugger
+        #debugger if Rails.env.development?
       end
       
       # Source Data
       event_struct.source_data = row.to_h
       #event_struct.date_start_at = 
       
-      debugger if Rails.env.development?
+      #debugger if Rails.env.development?
     end
   end
 end
