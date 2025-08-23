@@ -1,22 +1,22 @@
 <% require "dotenv"; Dotenv.load(".env") %>
 
-# Name of your application. Used to uniquely configure containers.
+# Name of your application
 service: pollitifyhub
 
-# SSL/Proxy config
+# SSL/Proxy configuration
 proxy:
   ssl: true
   hosts:
     - pollitify.com
     - www.pollitify.com
 
-# Credentials for image registry
+# Registry credentials
 registry:
   username: fuzzygroup
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# ENV variables
+# Environment variables
 env:
   secret:
     - RAILS_MASTER_KEY
@@ -28,50 +28,26 @@ env:
     REDIS_URL: redis://redis:6379/0
     RAILS_LOG_LEVEL: info
 
-# Persistent storage
+# Persistent storage for ActiveStorage, uploads, etc.
 volumes:
   - "pollitifyhub_storage:/rails/storage"
 
 # Asset path
 asset_path: /rails/public/assets
 
-# Builder config
+# Builder architecture
 builder:
   arch: amd64
 
-# SSH user (if needed)
-# ssh:
-#   user: app
-
-# Roles: web + worker
-roles:
+# Servers
+servers:
   web:
     hosts:
       - pollitify.com
-    cmd: "./bin/thrust ./bin/rails server"
+    # Start Rails + Sidekiq together
+    cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
 
-  worker:
-    hosts:
-      - pollitify.com
-    entrypoint: ""
-    cmd: "bundle exec sidekiq -C config/sidekiq.yml"
-
-# Accessories: Redis
-accessories:
-  redis:
-    image: redis:7.0
-    host: pollitify.com
-    port: 6379
-    directories:
-      - data:/data
-
-# Aliases for common tasks
-aliases:
-  console: app exec --interactive --reuse "bin/rails console"
-  shell: app exec --interactive --reuse "bash"
-  logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
-
+# A
 
 
 # <% require "dotenv"; Dotenv.load(".env") %>
