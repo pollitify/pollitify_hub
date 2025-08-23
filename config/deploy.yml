@@ -16,7 +16,7 @@ servers:
   worker:
     hosts:
       - pollitify.com
-    cmd: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+    cmd: "bundle exec sidekiq -C config/sidekiq.yml"
   # job:
   #   hosts:
   #     - 192.168.0.1
