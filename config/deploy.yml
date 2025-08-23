@@ -34,7 +34,7 @@ asset_path: /rails/public/assets
 
 builder:
   arch: amd64
-  tag_sha: false   # disable SHA in the tag
+  #tag_sha: false   # disable SHA in the tag
 
 servers:
   web:
