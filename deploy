@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 bin/rails code:syntax
+# nvm use 22
+# bin/rails test
 
 source .env.production
 # SECRET_KEY_BASE=fdfasdfdasfdsa RAILS_ENV=production bundle exec rails assets:precompile
