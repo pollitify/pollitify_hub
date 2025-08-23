@@ -3,6 +3,7 @@ class SearchQuery
   #
   # Resolve strings to actual objects so can query by IDs
   #
+  #  state, city, county = SearchQuery.get_objects("fishers", "IN")
   def self.get_objects(city_string, state_string)
     # Step 1: Normalize state from abbreviation to a state object
     state_status, state = SearchQuery.normalize_state(state_string)

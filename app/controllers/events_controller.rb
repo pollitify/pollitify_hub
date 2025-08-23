@@ -60,7 +60,10 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params.expect(:id))
+      #@event = Event.find(params.expect(:id))
+      #@event = Event.find_by!(slug: params[:id])
+      slug = params[:id].to_s.split("-").first
+      @event = Event.where(slug: slug).first
     end
 
     # Only allow a list of trusted parameters through.
