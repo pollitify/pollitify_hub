@@ -8,8 +8,8 @@ WORKDIR /rails
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
     build-essential curl git nodejs yarn postgresql-client libpq-dev \
-    imagemagick libmagickwand-dev python3 && \
-    rm -rf /var/lib/apt/lists/*
+    imagemagick libmagickwand-dev python3 libyaml-dev && \
+    rm -rf /var/lib/apt/lists/*    
 
 # Set bundler path and PATH for runtime
 ENV BUNDLE_PATH=/usr/local/bundle \
