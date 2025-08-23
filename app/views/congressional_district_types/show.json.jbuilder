@@ -1,0 +1,1 @@
+json.partial! "congressional_district_types/congressional_district_type", congressional_district_type: @congressional_district_type

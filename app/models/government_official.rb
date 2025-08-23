@@ -4,6 +4,36 @@ class GovernmentOfficial < ApplicationRecord
   belongs_to :political_party, optional: true
   belongs_to :congressional_district, optional: true
   
+  scope :senators, -> {
+    where(government_official_type_id: GovernmentOfficialType.senator.id)
+  }
+  
+  scope :congress_people, -> {
+    where(government_official_type_id: GovernmentOfficialType.congress_person.id)
+  }
+  
+  scope :state_senators, -> {
+    where(government_official_type_id: GovernmentOfficialType.state_senator.id)
+  }
+  
+  scope :state_congress_people, -> {
+    where(government_official_type_id: GovernmentOfficialType.state_rep.id)
+  }
+  
+  scope :by_state, ->(state_id) {
+    where(state_id: state_id)
+  }
+  
+  scope :federal_officials, -> {
+    where(government_official_type_id: GovernmentOfficialType.congress_person.id)
+    .or(where(government_official_type_id: GovernmentOfficialType.senator.id))
+  }
+  
+  scope :state_officials, -> {
+    where(government_official_type_id: GovernmentOfficialType.state_rep.id)
+    .or(where(government_official_type_id: GovernmentOfficialType.state_senator.id))
+  }
+  
   IDENTITY_RELATIONSHIP = :all # could also be :all
   IDENTITY_COLUMNS = [:state_name, :full_name, :title]
   include FindOrCreate

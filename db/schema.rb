@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_010037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -81,6 +81,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "congressional_district_types", force: :cascade do |t|
+    t.string "name"
+    t.string "fid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "congressional_districts", force: :cascade do |t|
     t.string "name"
     t.string "key_city"
@@ -88,6 +95,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
     t.bigint "state_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "congressional_district_type_id"
+    t.index ["congressional_district_type_id"], name: "idx_on_congressional_district_type_id_d7d9940e4f"
     t.index ["state_id"], name: "index_congressional_districts_on_state_id"
   end
 
@@ -557,15 +566,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
     t.bigint "state_id"
     t.bigint "county_id"
     t.bigint "city_id"
-    t.bigint "congressional_district_id"
+    t.bigint "federal_congressional_district_id"
+    t.bigint "state_congressional_district_id"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["congressional_district_id"], name: "index_users_on_congressional_district_id"
     t.index ["county_id"], name: "index_users_on_county_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["federal_congressional_district_id"], name: "index_users_on_federal_congressional_district_id"
     t.index ["first_name"], name: "index_users_on_first_name"
     t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["state_congressional_district_id"], name: "index_users_on_state_congressional_district_id"
     t.index ["state_id"], name: "index_users_on_state_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -594,6 +605,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
   add_foreign_key "cities", "states"
   add_foreign_key "comments", "news_feed_items"
   add_foreign_key "comments", "users"
+  add_foreign_key "congressional_districts", "congressional_district_types"
   add_foreign_key "congressional_districts", "states"
   add_foreign_key "counties", "states"
   add_foreign_key "event_types", "organizations"
@@ -620,7 +632,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_22_111212) do
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "cities"
-  add_foreign_key "users", "congressional_districts"
+  add_foreign_key "users", "congressional_districts", column: "federal_congressional_district_id"
+  add_foreign_key "users", "congressional_districts", column: "state_congressional_district_id"
   add_foreign_key "users", "counties"
   add_foreign_key "users", "states"
 end

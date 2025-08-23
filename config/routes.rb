@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :congressional_district_types
   resources :government_officials
   resources :government_official_types
   resources :political_parties

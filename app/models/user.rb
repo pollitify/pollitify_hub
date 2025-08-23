@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  belongs_to :state
-  belongs_to :county
-  belongs_to :city
+  belongs_to :state, optional: true
+  belongs_to :county, optional: true
+  belongs_to :city, optional: true
+  belongs_to :federal_congressional_district, class_name: "CongressionalDistrict", optional: true
+  belongs_to :state_congressional_district, class_name: "CongressionalDistrict", optional: true
   
   def state?
     return true if self.state
@@ -74,6 +76,18 @@ class User < ApplicationRecord
   #   end
   # end
   #Now you can call current_user.admin?, current_user.super_user?, etc.
+  
+  def self.taelar
+    User.where(username: 'taelar').first
+  end
+  
+  def self.alex
+    User.where(username: 'alex').first
+  end
+  
+  def self.kayla
+    User.where(username: 'kayla').first
+  end
 
   def self.scott
     User.where(username: 'fuzzygroup').first

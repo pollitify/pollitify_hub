@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Congressional district types" %>
+
+<h1>Congressional district types</h1>
+
+<div id="congressional_district_types">
+  <% @congressional_district_types.each do |congressional_district_type| %>
+    <%= render congressional_district_type %>
+    <p>
+      <%= link_to "Show this congressional district type", congressional_district_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New congressional district type", new_congressional_district_type_path %>

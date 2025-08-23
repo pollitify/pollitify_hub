@@ -2,9 +2,11 @@
 
 <% content_for :title, "Government officials" %>
 
-<h1>Your Federal Government Officials</h1> 
+<h1>Your Government Officials</h1> 
 <p><%= link_to("My Officials", '')%> || <%= link_to('My Representatives', '')%>|| <%=link_to("My Senators",'')%>|| <%= link_to("All Officials", '')%></p>
-
+<h2 class="text-center">Your Federal Government Officials</h2>
+<p class="lead">
+</p>
 <div id="government_officials">
   <!-- <%# @government_officials.each do |government_official| %>
     <%#= render government_official %>
@@ -14,7 +16,25 @@
   <%# end %> -->
   <%= render 'government_officials_header' %>
 
-  <% @government_officials.each do |government_official| %>
+  <% @federal_officials.each do |government_official| %>
+    <%= render 'government_officials', {government_official: government_official} %>
+  <% end %>
+  <%= render 'government_officials_footer' %>
+</div>
+
+<h2 class="text-center">Your State Government Officials</h2>
+<p class="lead">
+</p>
+<div id="government_officials">
+  <!-- <%# @government_officials.each do |government_official| %>
+    <%#= render government_official %>
+    <p>
+      <%#= link_to "Show this government official", government_official %>
+    </p>
+  <%# end %> -->
+  <%= render 'government_officials_header' %>
+
+  <% @state_officials.each do |government_official| %>
     <%= render 'government_officials', {government_official: government_official} %>
   <% end %>
   <%= render 'government_officials_footer' %>

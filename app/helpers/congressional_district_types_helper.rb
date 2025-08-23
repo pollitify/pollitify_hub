@@ -1,0 +1,2 @@
+module CongressionalDistrictTypesHelper
+end

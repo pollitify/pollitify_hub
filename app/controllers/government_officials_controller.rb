@@ -9,10 +9,21 @@ class GovernmentOfficialsController < ApplicationController
     if current_user && current_user.state?
       #raise "foo"
       #raise current_user.state.capitalize.inspect
-      @government_officials = GovernmentOfficial.where(state_id: current_user.state_id).order("title ASC, full_name ASC")
+      
+      @federal_senators = GovernmentOfficial.senators.by_state(current_user.state_id)
+      @federal_reps = GovernmentOfficial.congress_people.by_state(current_user.state_id).by_congressional_district(current_user.congressional_district_id)
+      
+      @state_senators = GovernmentOfficial.state_officials.by_state(current_user.state_id)
+      @state_reps = GovernmentOfficial.state_officials.by_state(current_user.state_id).by_congressional_district(current_user.congressional_district_id)
+      # GovernmentOfficial.where(state_id: current_user.state_id).where(government_official_type_id: GovernmentOfficialType.senator.id).order("title ASC, last_name ASC")
+      # @state_officials = GovernmentOfficial.where(state_id: current_user.state_id)
       #GovernmentOfficial.where("state_name = #{current_user.state}").order("state_name ASC")
     else
-      @government_officials = GovernmentOfficial.order("state_name ASC")
+      #@government_officials = GovernmentOfficial.order("state_name ASC")
+      @government_officials = GovernmentOfficial
+  .joins(:state)
+  .includes(:state) # eager-loads states to avoid N+1 queries
+  .order("states.name ASC, government_officials.last_name ASC")
     end
   end
   

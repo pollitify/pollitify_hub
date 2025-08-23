@@ -13,10 +13,12 @@ namespace :congressional_districts do
     CongressionalDistrict.destroy_all
   end
 
-  desc "TODO"
-  # be rake import_house:g_people --trace
+  #
+  # IMPORTANT :: THIS IS THE SEEDING FOR FEDERAL CONGRESSIONAL DISTRICTS !!!
+  # 
+  # be rake congressional_districts:seed --trace
   task :seed => :environment do
-    file_path = Rails.root.join('lib', 'tasks', 'data', 'congressional_districts.csv')
+    file_path = Rails.root.join('lib', 'tasks', 'data', 'federal_congressional_districts.csv')
     row_ctr = 0
     first = true
     CSV.foreach(file_path, headers: true) do |row|
@@ -32,7 +34,7 @@ namespace :congressional_districts do
        cd_struct = OpenStruct.new
        cd_struct.name = "#{s}"
        cd_struct.state_id = state.id
-       #cd_struct.user_id = User.scott.id
+       cd_struct.congressional_district_type_id = CongressionalDistrictType.federal.id
        
        status, cd = CongressionalDistrict.find_or_create(cd_struct)
      end
