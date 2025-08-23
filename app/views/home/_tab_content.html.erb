@@ -5,6 +5,12 @@
   <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
     <%= render "home/index_calendar", events: events %>
   </div>
+  <div class="tab-pane fade" id="suggest" role="tabpanel" aria-labelledby="calendar-tab">
+    <%= render "home/index_suggest", events: events %>
+  </div>
+  <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="news-tab">
+    <%= render "home/index_search_form" %>
+  </div>
   <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="news-tab">
     <%= render "home/index_news" %>
   </div>
