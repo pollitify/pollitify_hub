@@ -6,7 +6,7 @@ service: pollitifyhub
 # Name of the container image.
 image: fuzzygroup/pollitifyhub
 
-Deploy to these servers.
+# Deploy to these servers.
 servers:
   web:
     hosts:
