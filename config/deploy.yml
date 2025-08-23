@@ -14,7 +14,7 @@ servers:
   job:
     hosts:
       - pollitify.com
-    cmd: bundle exec sidekiq
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
     options:
       "add-host": host.docker.internal:host-gateway
 
