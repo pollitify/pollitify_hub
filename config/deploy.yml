@@ -3,7 +3,7 @@
 service: pollitifyhub
 
 # Top-level image
-image: fuzzygroup/pollitifyhub:latest
+image: fuzzygroup/pollitifyhub
 
 proxy:
   ssl: true
