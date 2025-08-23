@@ -44,6 +44,7 @@ servers:
   web:
     hosts:
       - pollitify.com
+    image: fuzzygroup/pollitifyhub:latest
     # Start Rails + Sidekiq together
     cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
 
