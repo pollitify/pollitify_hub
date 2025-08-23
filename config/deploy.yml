@@ -40,8 +40,8 @@ servers:
   web:
     hosts:
       - pollitify.com
-    cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
-
+    #cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
+    cmd: "./bin/thrust ./bin/rails server & /usr/local/bundle/bin/bundle exec sidekiq -C config/sidekiq.yml"
 accessories:
   redis:
     image: redis:7.0
