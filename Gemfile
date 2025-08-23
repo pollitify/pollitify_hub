@@ -121,6 +121,7 @@ gem "feedjira", "~> 3.2"
 #
 gem "sidekiq", "~> 8.0"
 gem "sidekiq-cron", "~> 2.3"
+gem 'redis' # if not already present
 
 gem "rails-controller-testing", "~> 1.0"
 gem "acts-as-taggable-on", "~> 12.0"

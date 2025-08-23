@@ -28,5 +28,8 @@ module Rails8Authentication
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # Add this line to use Sidekiq as the job queue adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end
