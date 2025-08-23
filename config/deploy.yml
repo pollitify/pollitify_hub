@@ -6,30 +6,25 @@ service: pollitifyhub
 # Name of the container image.
 image: fuzzygroup/pollitifyhub
 
-# Deploy to these servers.
-# servers:
-#   web:
-#     hosts:
-#       - pollitify.com
-#     options:
-#       "add-host": host.docker.internal:host-gateway
-#   worker:
-#     hosts:
-#       - pollitify.com
-#     #cmd: "bundle exec sidekiq -C config/sidekiq.yml"
-#     #cmd: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
-#     entrypoint: ""
-#     cmd: "bundle exec sidekiq -C config/sidekiq.yml"
-roles:
+Deploy to these servers.
+servers:
   web:
     hosts:
       - pollitify.com
-    cmd: "./bin/thrust ./bin/rails server"
+    options:
+      "add-host": host.docker.internal:host-gateway
+  # worker:
+  #   hosts:
+  #     - pollitify.com
+  #   #cmd: "bundle exec sidekiq -C config/sidekiq.yml"
+  #   #cmd: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+  #   entrypoint: ""
+  #   cmd: "bundle exec sidekiq -C config/sidekiq.yml"
   worker:
     hosts:
       - pollitify.com
+    image: fuzzygroup/pollitifyhub:latest
     cmd: "bundle exec sidekiq -C config/sidekiq.yml"
-    entrypoint: ""
 
   # job:
   #   hosts:

@@ -1,0 +1,5 @@
+FROM fuzzygroup/pollitifyhub:latest
+
+# Override entrypoint to nothing
+ENTRYPOINT []
+CMD ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
