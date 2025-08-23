@@ -18,6 +18,7 @@ servers:
       - pollitify.com
     #cmd: "bundle exec sidekiq -C config/sidekiq.yml"
     #cmd: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+    entrypoint: ""
     cmd: "bundle exec sidekiq -C config/sidekiq.yml"
 
   # job:
