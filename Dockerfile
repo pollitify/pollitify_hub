@@ -1,19 +1,28 @@
-FROM ruby:3.4.3-slim AS base
+# syntax=docker/dockerfile:1
+ARG RUBY_VERSION=3.4.3
+FROM ruby:$RUBY_VERSION-slim AS base
+
 WORKDIR /rails
 
-# Install dependencies
-RUN apt-get update -qq && apt-get install --no-install-recommends -y \
-    build-essential curl git nodejs yarn postgresql-client libpq-dev imagemagick libmagickwand-dev && \
+# Install dependencies needed for gems + node + postgres + imagemagick
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential curl git nodejs yarn postgresql-client libpq-dev \
+    imagemagick libmagickwand-dev python3 && \
     rm -rf /var/lib/apt/lists/*
 
-# Set bundler path
+# Set bundler path and PATH for runtime
 ENV BUNDLE_PATH=/usr/local/bundle \
     BUNDLE_WITHOUT="development:test" \
-    PATH=$BUNDLE_PATH/bin:$PATH
+    PATH=/usr/local/bundle/bin:$PATH
 
-# Copy app and install gems
-COPY Gemfile Gemfile.lock ./
+# Install bundler
 RUN gem install bundler -v 2.6.3
+
+# Copy Gemfile and lockfile first (Docker layer caching)
+COPY Gemfile Gemfile.lock ./
+
+# Install gems
 RUN bundle install --jobs 4 --retry 3
 
 # Copy the rest of the app
@@ -22,16 +31,53 @@ COPY . .
 # Precompile assets
 RUN ./bin/rails assets:precompile
 
-# Set non-root user
+# Non-root user
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails /rails
 
 USER rails
 
-# Entrypoint
+# Entrypoint and default CMD
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 CMD ["./bin/thrust", "./bin/rails", "server"]
+
+
+
+# FROM ruby:3.4.3-slim AS base
+# WORKDIR /rails
+#
+# # Install dependencies
+# RUN apt-get update -qq && apt-get install --no-install-recommends -y \
+#     build-essential curl git nodejs yarn postgresql-client libpq-dev imagemagick libmagickwand-dev && \
+#     rm -rf /var/lib/apt/lists/*
+#
+# # Set bundler path
+# ENV BUNDLE_PATH=/usr/local/bundle \
+#     BUNDLE_WITHOUT="development:test" \
+#     PATH=$BUNDLE_PATH/bin:$PATH
+#
+# # Copy app and install gems
+# COPY Gemfile Gemfile.lock ./
+# RUN gem install bundler -v 2.6.3
+# RUN bundle install --jobs 4 --retry 3
+#
+# # Copy the rest of the app
+# COPY . .
+#
+# # Precompile assets
+# RUN ./bin/rails assets:precompile
+#
+# # Set non-root user
+# RUN groupadd --system --gid 1000 rails && \
+#     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+#     chown -R rails:rails /rails
+#
+# USER rails
+#
+# # Entrypoint
+# ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# CMD ["./bin/thrust", "./bin/rails", "server"]
 
 
 
