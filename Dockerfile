@@ -28,6 +28,9 @@ RUN bundle install --jobs 4 --retry 3
 # Copy the rest of the app
 COPY . .
 
+ENV RAILS_MASTER_KEY=dummy
+ENV SECRET_KEY_BASE=dummy
+
 # Precompile assets
 RUN ./bin/rails assets:precompile
 
