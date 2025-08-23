@@ -92,6 +92,8 @@ RUN chmod +rx /rails/bin
 
 USER 1000:1000
 
+ENV PATH="$BUNDLE_PATH/bin:$PATH"
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
