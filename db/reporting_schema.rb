@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_23_125533) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_161919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_125533) do
     t.bigint "county_id"
     t.boolean "ada_accessible"
     t.string "state_name"
+    t.text "body"
     t.index ["city_id"], name: "index_events_on_city_id"
     t.index ["congressional_district_id"], name: "index_events_on_congressional_district_id"
     t.index ["county_id"], name: "index_events_on_county_id"

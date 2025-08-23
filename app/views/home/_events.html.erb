@@ -13,9 +13,13 @@
         </td>
       <% end %>
       <td nowrap><%= show_event_date(event)%></td>
-      <td class="text-center"><%= event.time_start_at.strftime("%I:%M %p") %> - <%= event.time_end_at.strftime("%I:%M %p") if event.time_end_at %>
+      <td class="text-center"><%= event.time_start_at.strftime("%I:%M %p") if event.time_start_at %> <%= event.time_end_at.strftime("%I:%M %p") if event.time_end_at %>
       <td class="text-center"><%= show_event_type(event) %></td>
       <td><%= link_to(event.name, event_path(event)) %></td>      
-      <td><%= event.location[0..40] %></td>
+      <td><%= event.location[0..60] if event.location %><br/>
+        <%= event.city.name if event.city %>
+      <%#= event.address1%>
+      
+      </td>
       </td>
     </tr>

@@ -64,6 +64,44 @@ class User < ApplicationRecord
     return true if self.username == 'fuzzygroup'
   end
   
+  def is_admin?
+    roles.exists?(name: "admin")
+  end
+  
+  def is_leadership?
+    roles.exists?(name: "leadership")
+  end
+  
+  def is_safety?
+    roles.exists?(name: "safety")
+  end
+  
+  def is_social_media?
+    roles.exists?(name: "social_media")
+  end
+
+  def is_socialmedia?
+    roles.exists?(name: "social_media")
+  end
+
+  
+  def is_super_user?
+    roles.exists?(name: "super_user")
+  end
+  
+  def is_superuser?
+    roles.exists?(name: "super_user")
+  end
+  
+  def is_volunteer?
+    roles.exists?(name: "volunteer")    
+  end
+  
+  def is_editor?
+    roles.exists?(name: "editor")    
+  end
+  
+  
   # You can dynamically define role-checking methods like:
   #
   # ruby

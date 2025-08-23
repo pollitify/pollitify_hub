@@ -38,6 +38,7 @@ class Event < ApplicationRecord
   TIME_FIELD = :time_start_at
   URL_FIELD = :url
   ZIP_FIELD = :zip
+  
 
   def self.slug_exists?(slug)
     return 200 if Event.where(slug: slug).first
@@ -52,6 +53,16 @@ class Event < ApplicationRecord
       return Event.create_slug
     end
     new_slug
+  end
+  
+  def date_start
+     event_start_at || date_start_at
+  end
+  
+  def time_start
+    event_start_at || time_start_at
+    # return self.event_start_at if self.event_start_at
+    # return self.time_start_at if self.time_start_at
   end
 
 

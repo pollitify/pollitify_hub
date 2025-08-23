@@ -2,9 +2,10 @@
 
 <%= render @event %>
 
-<div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
-  <%= link_to "Back to events", events_path %>
-
-  <%= button_to "Destroy this event", @event, method: :delete %>
-</div>
+<% if current_user && current_user.is_admin? %>
+  <div class="text-center">
+    <%= link_to "Edit this event", edit_event_path(@event) %> |
+    <%= link_to "Back to events", events_path %><br/>&nbsp;
+    <%= button_to "Destroy this event", @event, method: :delete %>
+  </div>
+<% end %>

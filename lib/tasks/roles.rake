@@ -14,7 +14,7 @@ namespace :roles do
     all_roles << "super_user"
     all_roles << "admin"
     all_roles << "leadership"
-    all_roles << "security"
+    all_roles << "safety"
     all_roles << "volunteer"
     all_roles << "social_media"
     all_roles << "editor"

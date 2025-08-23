@@ -21,7 +21,8 @@ module CalendarHelper
         weeks.map do |week|
           content_tag(:tr) do
             week.map do |day|
-              day_events = events.select { |e| e.event_start_at.to_date == day }
+              #day_events = events.select { |e| e.event_start_at.to_date == day }
+              day_events = events.select { |e| e.time_start && e.time_start.to_date == day }
               concat(content_tag(:td, class: ("bg-light text-muted" if day.month != date.month)) do
                 concat(content_tag(:div, day.day, class: "fw-bold small mb-1"))
                 day_events.each do |event|

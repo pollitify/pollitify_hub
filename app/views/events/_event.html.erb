@@ -1,7 +1,37 @@
 <div id="<%= dom_id event %>">
-  <p>
+  
+  <p><time class="start-date" datetime="<%=event.date_start_at.strftime("%Y-%m-%d")%>"><strong><%=event.date_start_at.strftime("%A, %B %-d")%></strong></time>
+    
+  <h1 class="event_title"><%= event.name %></h1>
+  
+  <p class="lead text-center" >This event is a <strong><em><%=event_type(event)%></em></strong></p>
+  
+  <% if event.body %>
+  <p class="lead">
+    <%= event.body%>
+  </p>
+  <% end %>
+  
+  <h2>Date and time</h2>
+  <i class="bi bi-calendar-event"></i>&nbsp;&nbsp;
+  <%= l(event.date_start.to_date, format: :long) %>&nbsp;·&nbsp;
+
+  <i class="bi bi-clock"></i>&nbsp;&nbsp;
+  <%= event_time_range(event)%>
+  <%#= l(event.time_start_at.strftime(""), format: :short) %>
+  <%=add_spacer%>
+  <h2>Location</h2>
+  <i class="bi bi-geo-alt-fill"></i>&nbsp;&nbsp;
+  <%= event.location %> / 
+  <%=event.city.name%></p>
+  <%=add_spacer%>
+  
+  <%= render 'event_card', event: event%>
+  
+  
+  <!-- <p>dddd
     <strong>Name:</strong>
-    <%= event.name %>
+
   </p>
 
   <p>
@@ -92,6 +122,6 @@
   <p>
     <strong>Pasted description:</strong>
     <%= event.pasted_description %>
-  </p>
+  </p> -->
 
 </div>

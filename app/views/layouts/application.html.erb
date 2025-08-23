@@ -23,6 +23,24 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <!-- app/views/layouts/application.html.erb in <head> -->
+    <% if @event %>
+    <meta property="og:title" content="<%= @event&.name || BASE_PRODUCT_NAME %>" />
+    <meta property="og:description" content="<%= @event&.body.truncate(100) if @event && @event.body %>" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:type" content="event" />
+    <% if 3 == 4%>
+    <meta property="og:image" content="<%= url_for(@event.image) if @event&.image.attached? %>" />
+    <% end %>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%= @event&.name %>" />
+    <meta name="twitter:description" content="<%= @event&.body.truncate(100) if @event.body %>" />
+    <% if 3 ==4%>
+    <meta name="twitter:image" content="<%= url_for(@event.image) if @event&.image.attached? %>" />
+    <% end %>
+    <% end %>
   </head>
 
   <body>

@@ -19,13 +19,15 @@ namespace :user_roles do
     
     Role.all.each do |role|
       users.each do |user|
+        #debugger
         user_role_struct = OpenStruct.new(
           role_id: role.id,
           user_id: user.id
         )
+        user_role_structs << user_role_struct
       end
     end
-    
+    #debugger
     add_user_roles(user_role_structs)
   end
   
@@ -34,7 +36,7 @@ namespace :user_roles do
       puts "Processing Role Struct:\n   #{user_role_struct.user_id} | #{user_role_struct.role_id}"
       
       status, user_role = UserRole.find_or_create(user_role_struct)
-
+      debugger
     end
   end
 

@@ -4,10 +4,13 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    @date = Date.today
+    @news_feed_items = NewsFeedItem.ordered_by_date.page(params[:page]).per(NEWS_FEED_PAGINATION_COUNT)
   end
 
   # GET /events/1 or /events/1.json
   def show
+    @qrcode = RQRCode::QRCode.new(request.original_url)
   end
 
   # GET /events/new

@@ -1,0 +1,72 @@
+<!-- app/views/events/_event_card.html.erb -->
+<div class="card mb-4 shadow-sm">
+  
+  <% if 3 == 4 && @event.image.attached? %>
+    <%= image_tag @event.image, class: "card-img-top", alt: @event.name %>
+  <% end %>
+
+  <div class="card-body">
+    <h2>Share This Event</h2>
+    <p>Want to see this event succeed?  Please help out by sharing this event on social media:</p>
+    
+    
+    <h5 class="card-title"><%= @event.name %></h5>
+    <% if event.body %>
+    <p class="card-text"><%= @event.body.truncate(150) %></p>
+    <% end %>
+
+    <ul class="list-unstyled mb-3">
+      <li><strong>Date:</strong> <%= @event.date_start.strftime("%b %-d, %Y") %></li>
+      <% if @event.event_end_at.present? %>
+        <li><strong>Time:</strong> <%= @event.time_start.strftime("%-l:%M %p") %> - <%= @event.time_end.strftime("%-l:%M %p") %> </li>
+      <% else %>
+        <li><strong>Time:</strong> <%= @event.time_start.strftime("%-l:%M %p") %></li>
+      <% end %>
+      <li><strong>Location:</strong> <%= @event.location %></li>
+    </ul>
+
+    <!-- Share Buttons -->
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <!-- Facebook -->
+      <a class="btn btn-primary btn-sm" target="_blank"
+         href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>">
+        <i class="bi bi-facebook"></i> Facebook
+      </a>
+
+      <!-- Twitter -->
+      <a class="btn btn-info btn-sm text-white" target="_blank"
+         href="https://twitter.com/intent/tweet?url=<%= request.original_url %>&text=<%= @event.name %>">
+        <i class="bi bi-twitter"></i> Twitter
+      </a>
+
+      <!-- WhatsApp -->
+      <a class="btn btn-success btn-sm" target="_blank"
+         href="https://api.whatsapp.com/send?text=<%= @event.name %> <%= request.original_url %>">
+        <i class="bi bi-whatsapp"></i> WhatsApp
+      </a>
+
+      <!-- Email -->
+      <a class="btn btn-warning btn-sm" href="mailto:?subject=<%= @event.name %>&body=Check out this event: <%= request.original_url %>">
+        <i class="bi bi-envelope"></i> Email
+      </a>
+
+      <!-- Copy Link -->
+      <button class="btn btn-secondary btn-sm" onclick="navigator.clipboard.writeText('<%= request.original_url %>')">
+        <i class="bi bi-link-45deg"></i> Copy Link
+      </button>
+
+      <!-- Add to Calendar -->
+      <a class="btn btn-outline-primary btn-sm" href="<%= event_path(@event, format: :ics) %>">
+        <i class="bi bi-calendar-event"></i> Add to Calendar
+      </a>
+    </div>
+
+    <!-- Optional QR Code -->
+    <% if @qrcode %>
+      <div class="text-center">
+        <%= raw @qrcode.as_svg(module_size: 4) %>
+        <p class="small mt-1">Scan to view event</p>
+      </div>
+    <% end %>
+  </div>
+</div>
