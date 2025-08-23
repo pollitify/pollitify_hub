@@ -1,4 +1,29 @@
 module ApplicationHelper
+  def mobile_device?
+     request.user_agent =~ /Mobile|webOS|Android|iPhone|iPad|iPod/
+   end
+   
+   def tab_title(tab_type)
+     #raise tab_type.inspect
+     case tab_type
+     when :event_list
+       #raise "In event list"
+       return 'Events' if mobile_device?
+       return 'Event List'
+     when :event_calendar
+       return 'Calendar' if mobile_device?
+       return 'Event Calendar'
+     when :suggest_event
+       return 'Suggest' if mobile_device?
+       return 'Suggest Event'
+     when :search_event
+       return 'Search' if mobile_device?
+       return 'Search Events'
+     when :news
+       return 'News'
+     end
+   end
+  
   def render_flash_message(key)
     if flash[key]
       css_class = key.to_s == "notice" ? "success" : "danger"
