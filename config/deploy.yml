@@ -2,6 +2,9 @@
 
 service: pollitifyhub
 
+# Top-level image
+image: fuzzygroup/pollitifyhub:latest
+
 proxy:
   ssl: true
   hosts:
@@ -36,7 +39,6 @@ servers:
   web:
     hosts:
       - pollitify.com
-    # Run Rails + Sidekiq together
     cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
 
 accessories:
