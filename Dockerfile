@@ -16,7 +16,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl iputils-ping libyaml-dev libjemalloc2 libvips sqlite3 postgresql-client postgresql-contrib imagemagick libmagickwand-dev libpq-dev && \
+    apt-get install --no-install-recommends -y curl iputils-ping libyaml-dev libjemalloc2 libvips sqlite3 postgresql-client postgresql-contrib imagemagick libmagickwand-dev libpq-dev procps && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
