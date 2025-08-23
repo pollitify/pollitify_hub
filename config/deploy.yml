@@ -1,22 +1,18 @@
 <% require "dotenv"; Dotenv.load(".env") %>
 
-# Name of your application
 service: pollitifyhub
 
-# SSL/Proxy configuration
 proxy:
   ssl: true
   hosts:
     - pollitify.com
     - www.pollitify.com
 
-# Registry credentials
 registry:
   username: fuzzygroup
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Environment variables
 env:
   secret:
     - RAILS_MASTER_KEY
@@ -28,25 +24,34 @@ env:
     REDIS_URL: redis://redis:6379/0
     RAILS_LOG_LEVEL: info
 
-# Persistent storage for ActiveStorage, uploads, etc.
 volumes:
   - "pollitifyhub_storage:/rails/storage"
 
-# Asset path
 asset_path: /rails/public/assets
 
-# Builder architecture
 builder:
   arch: amd64
 
-# Servers
 servers:
   web:
     hosts:
       - pollitify.com
-    image: fuzzygroup/pollitifyhub:latest
-    # Start Rails + Sidekiq together
+    # Run Rails + Sidekiq together
     cmd: "./bin/thrust ./bin/rails server & bundle exec sidekiq -C config/sidekiq.yml"
+
+accessories:
+  redis:
+    image: redis:7.0
+    host: pollitify.com
+    port: 6379
+    directories:
+      - data:/data
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
 # A
 
