@@ -5,6 +5,8 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 end
 
+
+
 Sidekiq.configure_server do |config|
   schedule_file = Rails.root.join("config/schedule.yml")
 

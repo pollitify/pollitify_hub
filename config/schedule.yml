@@ -13,6 +13,10 @@ cleanup_temp_files:
   cron: "*/5 * * * *"
   class: "CleanupTempFilesJob"
   queue: default
+  
+cleanup_job:
+  cron: "0 2 * * *"
+  class: "CleanupJob"
 
 # Runs every hour at minute 0
 # hourly_report:
