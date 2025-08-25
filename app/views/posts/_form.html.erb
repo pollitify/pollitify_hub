@@ -1,0 +1,64 @@
+<%= form_with model: post, local: true, class: "row g-3" do |form| %>
+  <% if post.errors.any? %>
+    <div class="col-12">
+      <div class="alert alert-danger">
+        <h4><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h4>
+        <ul>
+          <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-12">
+    <%= form.label :post_type, "Activity Type", class: "form-label" %>
+    <%= form.select :post_type, 
+        options_for_select([
+          ['General Update', 'general'],
+          ['Event Attendance', 'event_attendance'],
+          ['Canvassing', 'canvassing'],
+          ['Phone Banking', 'phone_banking'],
+          ['Donation Made', 'donation'],
+          ['Volunteer Work', 'volunteer_work'],
+          ['Rally Attendance', 'rally_attendance'],
+          ['Voter Registration', 'voter_registration'],
+          ['Petition Gathering', 'petition_gathering']
+        ], post.post_type), 
+        { prompt: 'Select activity type' }, 
+        { class: "form-select" } %>
+  </div>
+
+  <div class="col-md-6">
+    <%= form.label :activity_date, "Activity Date (for activism posts)", class: "form-label" %>
+    <%= form.date_field :activity_date, class: "form-control" %>
+  </div>
+
+  <div class="col-md-6">
+    <%= form.label :location, "Location (optional)", class: "form-label" %>
+    <%= form.text_field :location, class: "form-control", 
+        placeholder: "Where did this happen?" %>
+  </div>
+
+  <div class="col-12">
+    <%= form.label :content, "Share your activism story!", class: "form-label" %>
+    <%= form.text_area :content, rows: 4, class: "form-control", 
+        placeholder: "Tell us about your political action, what you learned, or how it felt to make a difference..." %>
+  </div>
+
+  <div class="col-12">
+    <div class="alert alert-info">
+      <small>
+        <i class="fas fa-info-circle"></i>
+        <strong>Activism posts earn points:</strong> Voter Registration (20 pts), Canvassing (15 pts), 
+        Volunteer Work (12 pts), Events & Rallies (10 pts), Phone Banking & Petitions (8 pts), Donations (5 pts)
+      </small>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit "Share Activity", class: "btn btn-primary" %>
+    <%= link_to "Cancel", posts_path, class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>

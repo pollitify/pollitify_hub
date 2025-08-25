@@ -1,4 +1,51 @@
 module ApplicationHelper
+  def post_type_icon(post_type)
+    icons = {
+      'general' => 'comment',
+      'event_attendance' => 'calendar-check',
+      'canvassing' => 'door-open',
+      'phone_banking' => 'phone',
+      'donation' => 'donate',
+      'volunteer_work' => 'hands-helping',
+      'rally_attendance' => 'bullhorn',
+      'voter_registration' => 'vote-yea',
+      'petition_gathering' => 'clipboard-list'
+    }
+    icons[post_type] || 'comment'
+  end
+
+  def activism_badge_class(post_type, verified = false)
+    if verified
+      'bg-success'
+    else
+      case post_type
+      when 'voter_registration', 'canvassing'
+        'bg-primary'
+      when 'rally_attendance', 'event_attendance'
+        'bg-info'
+      when 'volunteer_work', 'phone_banking'
+        'bg-warning'
+      when 'donation'
+        'bg-success'
+      else
+        'bg-secondary'
+      end
+    end
+  end
+
+  def points_color(points)
+    case points
+    when 15..Float::INFINITY
+      'text-success'
+    when 8..14
+      'text-primary'
+    when 1..7
+      'text-info'
+    else
+      'text-muted'
+    end
+  end
+  
   def mobile_device?
      request.user_agent =~ /Mobile|webOS|Android|iPhone|iPad|iPod/
    end

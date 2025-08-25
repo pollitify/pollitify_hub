@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_24_174800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "achievement_type", default: 0, null: false
+    t.integer "milestone_value", null: false
+    t.datetime "achieved_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["achieved_at"], name: "index_achievements_on_achieved_at"
+    t.index ["user_id", "achievement_type", "milestone_value"], name: "index_achievements_on_user_type_milestone", unique: true
+    t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +53,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.string "icon", null: false
+    t.string "color", null: false
+    t.integer "category", default: 0, null: false
+    t.integer "requirement_type", default: 0, null: false
+    t.integer "requirement_value", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_badges_on_active"
+    t.index ["category"], name: "index_badges_on_category"
+    t.index ["name"], name: "index_badges_on_name", unique: true
   end
 
   create_table "cities", force: :cascade do |t|
@@ -376,6 +404,29 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.integer "post_type"
+    t.boolean "verified"
+    t.integer "points_earned"
+    t.datetime "activity_date"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "follower_id"
+    t.bigint "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -557,6 +608,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "earned_at", null: false
+    t.integer "points_earned", default: 0
+    t.json "verification_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["earned_at"], name: "index_user_badges_on_earned_at"
+    t.index ["user_id", "badge_id"], name: "index_user_badges_on_user_id_and_badge_id", unique: true
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
@@ -596,6 +661,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
     t.bigint "city_id"
     t.bigint "federal_congressional_district_id"
     t.bigint "state_congressional_district_id"
+    t.text "bio"
+    t.string "location"
+    t.text "political_interests"
+    t.boolean "public_profile"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["county_id"], name: "index_users_on_county_id"
@@ -627,6 +696,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 
+  add_foreign_key "achievements", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "counties"
@@ -652,6 +722,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
   add_foreign_key "news_feed_items", "news_feed_urls"
   add_foreign_key "organizations", "domains"
   add_foreign_key "organizations", "secure_chat_systems"
+  add_foreign_key "posts", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -659,6 +732,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_202352) do
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "taggings", "tags"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "cities"

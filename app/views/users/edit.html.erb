@@ -1,5 +1,70 @@
-<h1>Editing user</h1>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4>Edit Profile</h4>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @user, local: true, multipart: true, class: "row g-3" do |form| %>
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <h4><%= pluralize(@user.errors.count, "error") %> prohibited this profile from being saved:</h4>
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 
-<%= render 'form', user: @user %>
+            <div class="col-md-6">
+              <%= form.label :first_name, class: "form-label" %>
+              <%= form.text_field :first_name, class: "form-control" %>
+            </div>
 
-<%= render 'form_footer_actions' %>
+            <div class="col-md-6">
+              <%= form.label :last_name, class: "form-label" %>
+              <%= form.text_field :last_name, class: "form-control" %>
+            </div>
+
+            <div class="col-12">
+              <%= form.label :avatar, "Profile Picture", class: "form-label" %>
+              <%= form.file_field :avatar, class: "form-control", accept: "image/*" %>
+            </div>
+
+            <div class="col-12">
+              <%= form.label :bio, class: "form-label" %>
+              <%= form.text_area :bio, rows: 4, class: "form-control", 
+                  placeholder: "Tell us about your activism journey..." %>
+            </div>
+
+            <div class="col-md-6">
+              <%= form.label :location, class: "form-label" %>
+              <%= form.text_field :location, class: "form-control", 
+                  placeholder: "City, State" %>
+            </div>
+
+            <div class="col-md-6">
+              <%= form.label :political_interests, "Political Interests (comma separated)", class: "form-label" %>
+              <%= form.text_field :political_interests, class: "form-control", 
+                  placeholder: "Climate Action, Voting Rights, Social Justice" %>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                <%= form.check_box :public_profile, class: "form-check-input" %>
+                <%= form.label :public_profile, "Make my profile public", class: "form-check-label" %>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <%= form.submit "Update Profile", class: "btn btn-primary" %>
+              <%= link_to "Cancel", @user, class: "btn btn-secondary ms-2" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

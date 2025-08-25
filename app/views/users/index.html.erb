@@ -1,23 +1,91 @@
-<h1>Users Management</h1>
-
-<%= link_to('New User', new_user_path) if current_user.super_admin? %>
-
-<div data-controller='live-search'
-  data-live-search-items-selector-value='.row > .col'
-  data-live-search-item-to-filter-value='.card-body > .card-title, .card-body > .card-text'>
-  <%= render 'filter' %>
-
-  <div data-search-status='true' class=''>
-    <p>Showing <span data-search-count='true'>0</span> of <span data-total-count='true'><%= User.count %></span> users</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Discover Activists</h3>
+    <div class="text-muted">
+      <small>Find and follow other activists in your community</small>
+    </div>
   </div>
 
-  <div data-root='true' class="row d-none my-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-    <%= render @users %>
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar, class: "rounded-circle mb-3", 
+                  style: "width: 80px; height: 80px; object-fit: cover;" %>
+            <% else %>
+              <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                   style="width: 80px; height: 80px;">
+                <i class="fas fa-user fa-2x text-white"></i>
+              </div>
+            <% end %>
+            
+            <h6 class="card-title">
+              <%= link_to user.display_name, user, class: "text-decoration-none" %>
+            </h6>
+            
+            <% if user.location.present? %>
+              <p class="text-muted small">
+                <i class="fas fa-map-marker-alt"></i> <%= user.location %>
+              </p>
+            <% end %>
+            
+            <% if user.bio.present? %>
+              <p class="card-text small text-muted">
+                <%= truncate(user.bio, length: 80) %>
+              </p>
+            <% end %>
+            
+            <!-- Stats Row -->
+            <div class="row text-center small mb-3">
+              <div class="col-4">
+                <strong><%= user.posts.count %></strong><br>
+                <span class="text-muted">Posts</span>
+              </div>
+              <div class="col-4">
+                <strong><%= user.followers.count %></strong><br>
+                <span class="text-muted">Followers</span>
+              </div>
+              <div class="col-4">
+                <strong class="text-success"><%= user.total_activism_points %></strong><br>
+                <span class="text-muted">Points</span>
+              </div>
+            </div>
+            
+            <!-- Political Interests -->
+            <% if user.political_interests.present? %>
+              <div class="mb-3">
+                <% user.political_interests_array.first(2).each do |interest| %>
+                  <span class="badge bg-light text-dark me-1 small"><%= interest %></span>
+                <% end %>
+                <% if user.political_interests_array.size > 2 %>
+                  <span class="badge bg-light text-muted small">+<%= user.political_interests_array.size - 2 %></span>
+                <% end %>
+              </div>
+            <% end %>
+            
+            <!-- Follow Button -->
+            <% if current_user.following?(user) %>
+              <%= form_with model: current_user.active_relationships.find_by(followed_id: user.id), 
+                  method: :delete, local: false, class: "d-inline" do |form| %>
+                <%= form.submit "Following", class: "btn btn-outline-success btn-sm" %>
+              <% end %>
+            <% else %>
+              <%= form_with model: Relationship.new, local: false, class: "d-inline" do |form| %>
+                <%= form.hidden_field :followed_id, value: user.id %>
+                <%= form.submit "Follow", class: "btn btn-primary btn-sm" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class='alert alert-info d-none no-results'>
-    No results found.
-  </div>
+  
+  <% if @users.respond_to?(:current_page) %>
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate @users %>
+    </div>
+  <% end %>
 </div>
-
-<%= link_to('New User', new_user_path, class: 'btn btn-primary') if current_user.super_admin? %>

@@ -19,6 +19,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/favicon.png">
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" %>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -43,7 +44,7 @@
     <% end %>
   </head>
 
-  <body>
+  <body  class="d-flex flex-column min-vh-100">
     <%= render 'layouts/nav' %>
 
     <div id='main' class='container py-4'>
@@ -51,7 +52,13 @@
 
       <%= render 'shared/flash_messages' %>
 
+    <%= render 'shared/navbar' %>
+    <%#= render 'shared/badge_notifications' if user_signed_in? %>
+    <%= render 'shared/badge_display' if user_signed_in? %>
+    <main class="flex-grow-1">
+    
       <%= yield %>
+    </main>
       
       <% if cookies[:user_location].blank? && 3 == 4%>
       <%# if 2 == 2%>

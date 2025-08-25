@@ -1,0 +1,27 @@
+<div class="badge-display">
+  <% if current_user.badges.any? %>
+    <div class="d-flex flex-wrap gap-2">
+      <% current_user.recent_badges(5).each do |user_badge| %>
+        <div class="position-relative" data-bs-toggle="tooltip" 
+             title="<%= user_badge.badge.name %>: <%= user_badge.badge.description %>">
+          <%= link_to badge_path(user_badge.badge), class: "text-decoration-none" do %>
+            <div class="bg-<%= user_badge.badge.color %> rounded-circle d-inline-flex align-items-center justify-content-center" 
+                 style="width: 35px; height: 35px;">
+              <i class="fas fa-<%= user_badge.badge.icon %> text-white"></i>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <% if current_user.badges.count > 5 %>
+        <div class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center" 
+             style="width: 35px; height: 35px;" data-bs-toggle="tooltip" 
+             title="<%= current_user.badges.count - 5 %> more badges">
+          <small class="text-white fw-bold">+<%= current_user.badges.count - 5 %></small>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <small class="text-muted">No badges earned yet</small>
+  <% end %>
+</div>

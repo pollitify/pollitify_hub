@@ -1,0 +1,97 @@
+<!-- app/views/posts/_post_card.html.erb -->
+<div class="card mb-3">
+  <div class="card-body">
+    <!-- User Info Header -->
+    <div class="d-flex align-items-start mb-3">
+      <% if post.user.avatar.attached? %>
+        <%= image_tag post.user.avatar, class: "rounded-circle me-3", 
+            style: "width: 50px; height: 50px; object-fit: cover;" %>
+      <% else %>
+        <div class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center me-3" 
+             style="width: 50px; height: 50px;">
+          <i class="fas fa-user text-white"></i>
+        </div>
+      <% end %>
+      
+      <div class="flex-grow-1">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6 class="mb-1">
+              <%= link_to post.user.display_name, post.user, class: "text-decoration-none" %>
+            </h6>
+            <small class="text-muted">
+              <%= time_ago_in_words(post.created_at) %> ago
+              <% if post.location.present? %>
+                • <i class="fas fa-map-marker-alt"></i> <%= post.location %>
+              <% end %>
+            </small>
+          </div>
+          
+          <% if post.user == current_user %>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" 
+                      data-bs-toggle="dropdown">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Edit", edit_post_path(post), class: "dropdown-item" %></li>
+                <li><%= link_to "Delete", post_path(post), method: :delete, 
+                        data: { confirm: "Are you sure?" }, class: "dropdown-item text-danger" %></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Post Type Badge -->
+    <% if post.activism_post? %>
+      <div class="mb-2">
+        <span class="badge bg-<%= post.verified? ? 'success' : 'warning' %> me-2">
+          <i class="fas fa-<%= post_type_icon(post.post_type) %>"></i>
+          <%= post.post_type_display %>
+          <% if post.verified? %>
+            <i class="fas fa-check-circle ms-1"></i>
+          <% end %>
+        </span>
+        
+        <% if post.verified? && post.points_earned > 0 %>
+          <span class="badge bg-info">+<%= post.points_earned %> points</span>
+        <% end %>
+        
+        <% if post.activity_date.present? %>
+          <small class="text-muted ms-2">
+            <i class="fas fa-calendar"></i> <%= post.activity_date.strftime("%m/%d/%Y") %>
+          </small>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <!-- Post Content -->
+    <p class="card-text"><%= simple_format(post.content) %></p>
+    
+    <!-- Actions -->
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="btn-group" role="group">
+        <!-- Like/Dislike Buttons -->
+        <%= form_with url: like_post_path(post), method: :put, local: false, class: "d-inline" do |form| %>
+          <button type="submit" class="btn btn-outline-success btn-sm 
+                  <%= 'active' if current_user.voted_up_on?(post) %>">
+            <i class="fas fa-thumbs-up"></i> <%= post.get_upvotes.size %>
+          </button>
+        <% end %>
+        
+        <%= form_with url: dislike_post_path(post), method: :put, local: false, class: "d-inline" do |form| %>
+          <button type="submit" class="btn btn-outline-danger btn-sm ms-1
+                  <%= 'active' if current_user.voted_down_on?(post) %>">
+            <i class="fas fa-thumbs-down"></i> <%= post.get_downvotes.size %>
+          </button>
+        <% end %>
+      </div>
+      
+      <small class="text-muted">
+        <%= link_to "View Details", post, class: "text-decoration-none" %>
+      </small>
+    </div>
+  </div>
+</div>

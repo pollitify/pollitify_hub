@@ -1,0 +1,193 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Main Feed -->
+    <div class="col-md-8">
+      <!-- Recent Badges -->
+      <% if current_user.badges.any? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="mb-0">Recent Badges</h6>
+          </div>
+          <div class="card-body">
+            <% current_user.recent_badges(3).each do |user_badge| %>
+              <div class="d-flex align-items-center mb-2">
+                <div class="bg-<%= user_badge.badge.color %> rounded-circle p-2 me-3" style="width: 35px; height: 35px;">
+                  <i class="fas fa-<%= user_badge.badge.icon %> text-white fa-sm"></i>
+                </div>
+                <div>
+                  <small class="fw-bold"><%= user_badge.badge.name %></small><br>
+                  <small class="text-muted">+<%= user_badge.points_earned %> pts</small>
+                </div>
+              </div>
+            <% end %>
+            <div class="text-center mt-3">
+              <%= link_to "View All Badges", badges_path, class: "btn btn-outline-primary btn-sm" %>
+            </div>
+          </div>
+        </div>
+      <% end %><!-- Page Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Activism Feed</h3>
+        <%= link_to "Share Your Action", new_post_path, class: "btn btn-primary" %>
+      </div>
+
+      <!-- Quick Post Form -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h6 class="mb-0">What activism did you do today?</h6>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @post, local: false, class: "row g-3" do |form| %>
+            <div class="col-12">
+              <%= form.select :post_type, 
+                  options_for_select([
+                    ['General Update', 'general'],
+                    ['Event Attendance', 'event_attendance'],
+                    ['Canvassing', 'canvassing'],
+                    ['Phone Banking', 'phone_banking'],
+                    ['Donation Made', 'donation'],
+                    ['Volunteer Work', 'volunteer_work'],
+                    ['Rally Attendance', 'rally_attendance'],
+                    ['Voter Registration', 'voter_registration'],
+                    ['Petition Gathering', 'petition_gathering'],
+                    ['Speaking at an Event', 'speaking_at_an_event'], 
+                    ['Social Media Posting', 'social_media_posting']                    
+                  ]), 
+                  { prompt: 'What did you do?' }, 
+                  { class: "form-select form-select-sm" } %>
+            </div>
+            <div class="col-12">
+              <%= form.text_area :content, rows: 3, class: "form-control", 
+                  placeholder: "Share your activism story..." %>
+            </div>
+            <div class="col-md-6">
+              <%= form.date_field :activity_date, class: "form-control form-control-sm",  value: Date.today %>
+            </div>
+            <div class="col-md-6">
+              <%= form.text_field :location, class: "form-control form-control-sm", 
+                  placeholder: "Location" %>
+            </div>
+            <div class="col-12">
+              <%= form.submit "Share", class: "btn btn-primary btn-sm" %>
+              <small class="text-muted ms-3">Posts earn points when verified!</small>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Posts Feed -->
+      <div id="posts">
+        <% @posts.each do |post| %>
+          <%= render 'post_card', post: post %>
+        <% end %>
+      </div>
+      
+      <% if @posts.respond_to?(:current_page) %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= paginate @posts %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+      <!-- Current User Stats -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h6 class="mb-0">Your Impact</h6>
+        </div>
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="col-6">
+              <strong class="text-primary"><%= current_user.posts.count %></strong><br>
+              <small class="text-muted">Total Posts</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-success"><%= current_user.total_activism_points %></strong><br>
+              <small class="text-muted">Points</small>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <strong class="text-info"><%= current_user.following.count %></strong><br>
+              <small class="text-muted">Following</small>
+            </div>
+            <div class="col-6">
+              <strong class="text-warning"><%= current_user.followers.count %></strong><br>
+              <small class="text-muted">Followers</small>
+            </div>
+          </div>
+          <div class="mt-3">
+            <%= link_to "View Profile", current_user, class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Badges -->
+      <% if current_user.badges.any? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h6 class="mb-0">Recent Badges</h6>
+          </div>
+          <div class="card-body">
+            <% current_user.recent_badges(3).each do |user_badge| %>
+              <div class="d-flex align-items-center mb-2">
+                <div class="bg-<%= user_badge.badge.color %> rounded-circle p-2 me-3" style="width: 35px; height: 35px;">
+                  <i class="fas fa-<%= user_badge.badge.icon %> text-white fa-sm"></i>
+                </div>
+                <div>
+                  <small class="fw-bold"><%= user_badge.badge.name %></small><br>
+                  <small class="text-muted">+<%= user_badge.points_earned %> pts</small>
+                </div>
+              </div>
+            <% end %>
+            <div class="text-center mt-3">
+              <%= link_to "View All Badges", badges_path, class: "btn btn-outline-primary btn-sm" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Leaderboard -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h6 class="mb-0">Top Activists This Week</h6>
+        </div>
+        <div class="card-body">
+          <% User.joins(:posts).where(posts: { created_at: 1.week.ago.. })
+                 .group('users.id').order('SUM(posts.points_earned) DESC')
+                 .limit(5).each_with_index do |user, index| %>
+            <div class="d-flex align-items-center mb-2">
+              <span class="badge bg-<%= index == 0 ? 'warning' : 'secondary' %> me-2">
+                <%= index + 1 %>
+              </span>
+              <%= link_to user.display_name, user, class: "text-decoration-none flex-grow-1" %>
+              <small class="text-success">
+                <%= user.posts.where(created_at: 1.week.ago..).sum(:points_earned) %> pts
+              </small>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Activity Types -->
+      <div class="card">
+        <div class="card-header">
+          <h6 class="mb-0">Point Values</h6>
+        </div>
+        <div class="card-body">
+          <small class="text-muted">
+            <strong>Voter Registration:</strong> 20 pts<br>
+            <strong>Canvassing:</strong> 15 pts<br>
+            <strong>Volunteer Work:</strong> 12 pts<br>
+            <strong>Events & Rallies:</strong> 10 pts<br>
+            <strong>Phone Banking:</strong> 8 pts<br>
+            <strong>Petition Gathering:</strong> 8 pts<br>
+            <strong>Donations:</strong> 5 pts<br>
+            <strong>General Updates:</strong> 1 pt<br>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

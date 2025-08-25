@@ -1,0 +1,123 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- Badge Icon -->
+          <div class="bg-<%= @user_badge ? @badge.color : 'secondary' %> rounded-circle d-inline-flex align-items-center justify-content-center mb-4" 
+               style="width: 120px; height: 120px;">
+            <i class="fas fa-<%= @badge.icon %> fa-4x text-white"></i>
+          </div>
+
+          <!-- Badge Info -->
+          <h3 class="<%= @user_badge ? 'text-' + @badge.color : 'text-muted' %>">
+            <%= @badge.name %>
+          </h3>
+          <p class="text-muted lead"><%= @badge.description %></p>
+
+          <!-- Earned Status -->
+          <% if @user_badge %>
+            <div class="alert alert-success">
+              <i class="fas fa-check-circle"></i>
+              <strong>Congratulations!</strong> You earned this badge 
+              <%= time_ago_in_words(@user_badge.earned_at) %> ago
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <strong class="text-success">+<%= @user_badge.points_earned %></strong><br>
+                <small class="text-muted">Bonus Points</small>
+              </div>
+              <div class="col-6">
+                <strong><%= @user_badge.earned_at.strftime('%B %d, %Y') %></strong><br>
+                <small class="text-muted">Date Earned</small>
+              </div>
+            </div>
+          <% else %>
+            <!-- Progress Section -->
+            <div class="alert alert-info">
+              <h6>Progress Toward This Badge</h6>
+              <div class="progress mb-3" style="height: 25px;">
+                <div class="progress-bar bg-<%= @badge.color %>" role="progressbar" 
+                     style="width: <%= @progress_percentage %>%">
+                  <%= @progress_percentage %>%
+                </div>
+              </div>
+              <p class="mb-0">
+                <strong><%= @progress %></strong> of <strong><%= @badge.requirement_value %></strong>
+                <%= @badge.requirement_type.humanize.downcase %>
+              </p>
+            </div>
+
+            <!-- Requirements -->
+            <div class="mt-4">
+              <h6>Requirements:</h6>
+              <div class="bg-light p-3 rounded">
+                <% case @badge.requirement_type %>
+                <% when 'total_posts' %>
+                  <p class="mb-0">Share <%= @badge.requirement_value %> posts about your activism</p>
+                <% when 'post_type_count' %>
+                  <p class="mb-0">Complete <%= @badge.requirement_value %> <%= @badge.name.split.last.downcase %> activities</p>
+                <% when 'total_points' %>
+                  <p class="mb-0">Earn <%= @badge.requirement_value %> total activism points</p>
+                <% when 'followers_count' %>
+                  <p class="mb-0">Have <%= @badge.requirement_value %> followers</p>
+                <% when 'following_count' %>
+                  <p class="mb-0">Follow <%= @badge.requirement_value %> other activists</p>
+                <% when 'likes_received' %>
+                  <p class="mb-0">Receive <%= @badge.requirement_value %> likes on your posts</p>
+                <% when 'days_active' %>
+                  <p class="mb-0">Be active for <%= @badge.requirement_value %> different days</p>
+                <% else %>
+                  <p class="mb-0"><%= @badge.requirement_type.humanize %>: <%= @badge.requirement_value %></p>
+                <% end %>
+              </div>
+            </div>
+
+            <!-- Tips -->
+            <% if @progress_percentage < 100 %>
+              <div class="mt-4">
+                <h6>Tips to earn this badge:</h6>
+                <div class="text-start">
+                  <% case @badge.requirement_type %>
+                  <% when 'total_posts' %>
+                    <ul class="list-unstyled">
+                      <li><i class="fas fa-lightbulb text-warning"></i> Share your daily activism activities</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Document your volunteer work</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Post about events you attend</li>
+                    </ul>
+                  <% when 'total_points' %>
+                    <ul class="list-unstyled">
+                      <li><i class="fas fa-lightbulb text-warning"></i> Focus on high-value activities like voter registration</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Get your posts verified for maximum points</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Participate in canvassing and volunteer work</li>
+                    </ul>
+                  <% when 'followers_count' %>
+                    <ul class="list-unstyled">
+                      <li><i class="fas fa-lightbulb text-warning"></i> Share engaging content about your activism</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Connect with people at events</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Follow others and they may follow back</li>
+                    </ul>
+                  <% when 'following_count' %>
+                    <ul class="list-unstyled">
+                      <li><i class="fas fa-lightbulb text-warning"></i> Browse the <%= link_to "Discover page", users_path, class: "text-decoration-none" %></li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Follow activists you meet at events</li>
+                      <li><i class="fas fa-lightbulb text-warning"></i> Look for people with similar interests</li>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+
+          <!-- Actions -->
+          <div class="mt-4">
+            <%= link_to "Back to Badges", badges_path, class: "btn btn-outline-secondary" %>
+            <% unless @user_badge %>
+              <%= link_to "Share a Post", new_post_path, class: "btn btn-primary ms-2" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
