@@ -58,6 +58,13 @@ class User < ApplicationRecord
   
   attr_accessor :login
   
+  #
+  # Turn off sending a password change email 
+  #
+  def send_password_change_notification?
+    false
+  end
+  
   # Helper methods for following functionality
   def follow(other_user)
     following << other_user unless following?(other_user) || self == other_user

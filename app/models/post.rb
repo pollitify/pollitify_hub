@@ -3,6 +3,10 @@ class Post < ApplicationRecord
   
   # You already have acts_as_votable
   acts_as_votable
+  
+  IDENTITY_RELATIONSHIP = :all # could also be :all
+  IDENTITY_COLUMNS = [:user_id, :post_type, :activity_date]
+  include FindOrCreate
 
   # Post types focused on activism
   enum :post_type, {
